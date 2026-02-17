@@ -87,7 +87,7 @@ jobs:
                       sys.exit(1)
                   else:
                       print(f"  Created: {result.stdout.strip()}")
-                  time.sleep(1)  # avoid rate limiting
+                  time.sleep(0.5)  # avoid rate limiting
 
           print("All issues created successfully.")
           SCRIPT
