@@ -1,0 +1,93 @@
+name: Create Issues from Roadmap
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  create-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create phase labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "phase-0" --color "0E8A16" --description "Faza 0 — Fundament projektu" --force || true
+          gh label create "phase-1" --color "1D76DB" --description "Faza 1 — Prototyp (MVP)" --force || true
+          gh label create "phase-2" --color "FBCA04" --description "Faza 2 — Systemy bazowe" --force || true
+          gh label create "phase-3" --color "D93F0B" --description "Faza 3 — Misje i progresja" --force || true
+          gh label create "phase-4" --color "E99695" --description "Faza 4 — Polish i balans" --force || true
+          gh label create "phase-5" --color "C5DEF5" --description "Faza 5 — Testowanie i wydanie" --force || true
+
+      - name: Parse roadmap and create issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 << 'SCRIPT'
+          import subprocess, re, sys, time
+
+          with open("docs/ROADMAP.md", "r") as f:
+              content = f.read()
+
+          phase_names = {
+              0: "Faza 0 — Fundament projektu",
+              1: "Faza 1 — Prototyp (MVP)",
+              2: "Faza 2 — Systemy bazowe",
+              3: "Faza 3 — Misje i progresja",
+              4: "Faza 4 — Polish i balans",
+              5: "Faza 5 — Testowanie i wydanie",
+          }
+
+          current_phase = None
+          current_section = None
+
+          for line in content.split("\n"):
+              phase_match = re.match(r"^## Faza (\d+) — (.+)", line)
+              if phase_match:
+                  current_phase = int(phase_match.group(1))
+                  current_section = None
+                  continue
+
+              section_match = re.match(r"^### (\d+\.\d+) (.+)", line)
+              if section_match:
+                  current_section = section_match.group(2)
+                  continue
+
+              todo_match = re.match(r"^- \*\*(.+?)\*\* — (.+)", line)
+              if todo_match and current_phase is not None:
+                  title = todo_match.group(1)
+                  description = todo_match.group(2)
+
+                  section_line = f"**Sekcja:** {current_section}\n" if current_section else ""
+                  body = (
+                      f"## Opis zadania\n\n"
+                      f"{description}\n\n"
+                      f"{section_line}"
+                      f"\n## Faza roadmapy\n\n"
+                      f"{phase_names.get(current_phase, f'Faza {current_phase}')}\n"
+                  )
+
+                  label = f"phase-{current_phase}"
+
+                  cmd = [
+                      "gh", "issue", "create",
+                      "--title", f"[TASK] {title}",
+                      "--body", body,
+                      "--label", label,
+                  ]
+
+                  print(f"Creating issue: [TASK] {title}")
+                  result = subprocess.run(cmd, capture_output=True, text=True)
+                  if result.returncode != 0:
+                      print(f"  Error: {result.stderr}", file=sys.stderr)
+                      sys.exit(1)
+                  else:
+                      print(f"  Created: {result.stdout.strip()}")
+                  time.sleep(0.5)  # avoid rate limiting
+
+          print("All issues created successfully.")
+          SCRIPT
