@@ -16,6 +16,10 @@ var weapon_items: Array[Dictionary] = [
 	{"id": "weapon_shotgun", "name": "Strzelba", "cost": 100, "description": "5 pocisków, krótki zasięg", "type": "weapon"},
 	{"id": "weapon_pistol", "name": "Pistolet", "cost": 70, "description": "Wysoka celność, duży zasięg", "type": "weapon"},
 	{"id": "weapon_rifle", "name": "Karabin", "cost": 50, "description": "Szybki ogień, średni dmg", "type": "weapon"},
+	{"id": "weapon_smg", "name": "SMG", "cost": 90, "description": "Bardzo szybki ogień, krótki zasięg", "type": "weapon"},
+	{"id": "weapon_sniper", "name": "Snajperka", "cost": 150, "description": "Wysoki dmg, duży zasięg, wolny ogień", "type": "weapon"},
+	{"id": "weapon_melee", "name": "Broń biała", "cost": 60, "description": "Bardzo wysokie dmg w zwarciu", "type": "weapon"},
+	{"id": "weapon_grenade", "name": "Granatnik", "cost": 130, "description": "Rozsiew 4 pocisków, wolny ogień", "type": "weapon"},
 ]
 
 var recruit_classes: Array[Dictionary] = []
@@ -243,6 +247,14 @@ func _apply_weapon(weapon_id: String) -> void:
 					s.set_weapon(WeaponData.create_shotgun())
 				"weapon_pistol":
 					s.set_weapon(WeaponData.create_pistol())
+				"weapon_smg":
+					s.set_weapon(WeaponData.create_smg())
+				"weapon_sniper":
+					s.set_weapon(WeaponData.create_sniper_rifle())
+				"weapon_melee":
+					s.set_weapon(WeaponData.create_melee())
+				"weapon_grenade":
+					s.set_weapon(WeaponData.create_grenade())
 			# Re-apply passive weapon mults
 			GameManager._apply_passives_to_soldier(s)
 
@@ -262,6 +274,10 @@ func _all_have_weapon(weapon_type_id: String) -> bool:
 		"weapon_rifle": target_type = WeaponData.Type.RIFLE
 		"weapon_shotgun": target_type = WeaponData.Type.SHOTGUN
 		"weapon_pistol": target_type = WeaponData.Type.PISTOL
+		"weapon_smg": target_type = WeaponData.Type.SMG
+		"weapon_sniper": target_type = WeaponData.Type.SNIPER_RIFLE
+		"weapon_melee": target_type = WeaponData.Type.MELEE
+		"weapon_grenade": target_type = WeaponData.Type.GRENADE
 		_: return false
 	var soldiers := get_tree().get_nodes_in_group("squad")
 	for s in soldiers:

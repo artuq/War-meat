@@ -36,7 +36,7 @@ static func create_sniper() -> SoldierClass:
 	c.base_hp = 60
 	c.base_speed = 65.0
 	c.damage_mult = 1.8
-	c.default_weapon_type = WeaponData.Type.PISTOL
+	c.default_weapon_type = WeaponData.Type.SNIPER_RIFLE
 	c.draw_color = Color(0.9, 0.8, 0.2)
 	c.draw_radius = 5.0
 	c.base_luck = 15.0
@@ -65,6 +65,14 @@ static func get_default_weapon(sc: SoldierClass) -> WeaponData:
 			return WeaponData.create_shotgun()
 		WeaponData.Type.PISTOL:
 			return WeaponData.create_pistol()
+		WeaponData.Type.SMG:
+			return WeaponData.create_smg()
+		WeaponData.Type.SNIPER_RIFLE:
+			return WeaponData.create_sniper_rifle()
+		WeaponData.Type.MELEE:
+			return WeaponData.create_melee()
+		WeaponData.Type.GRENADE:
+			return WeaponData.create_grenade()
 	return WeaponData.create_rifle()
 
 
@@ -89,7 +97,7 @@ static func create_scout() -> SoldierClass:
 	c.base_hp = 55
 	c.base_speed = 110.0
 	c.damage_mult = 1.2
-	c.default_weapon_type = WeaponData.Type.PISTOL
+	c.default_weapon_type = WeaponData.Type.SMG
 	c.draw_color = Color(0.4, 0.9, 0.9)
 	c.draw_radius = 5.0
 	c.base_luck = 25.0
