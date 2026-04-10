@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/ui/hub_screen.gd" id="1_script"]
+
+[node name="HubScreen" type="CanvasLayer"]
+script = ExtResource("1_script")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResourcesLabel" type="Label" parent="Panel"]
+layout_mode = 2
+offset_top = 4
+offset_right = -8
+offset_bottom = 20
+theme_override_font_sizes/font_size = 12
+text = "Surowce: 0"
+horizontal_alignment = 2
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+layout_mode = 2
+offset_top = 22
+
+[node name="Areny" type="MarginContainer" parent="Panel/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ArenaList" type="VBoxContainer" parent="Panel/TabContainer/Areny"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Ulepszenia" type="MarginContainer" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/Ulepszenia"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UpgradeList" type="VBoxContainer" parent="Panel/TabContainer/Ulepszenia/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Klasy" type="MarginContainer" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/Klasy"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ClassList" type="VBoxContainer" parent="Panel/TabContainer/Klasy/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

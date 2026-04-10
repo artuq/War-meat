@@ -1,0 +1,105 @@
+2026-03-22T12:53:57.297Z [debug] copilotExt.exports keys: getAPI
+2026-03-22T12:53:57.298Z [debug] exportsObj keys: getAPI
+2026-03-22T12:53:57.298Z [info] Detected getAPI export; attempting to call to obtain API object
+2026-03-22T12:53:57.299Z [debug] copilot API keys: _scopeSelector, _languageContextProviderService
+2026-03-22T12:53:57.299Z [info] register attempt 1
+2026-03-22T12:53:57.300Z [info] Detected vscode.lm.registerLanguageModelChatProvider; registering provider
+2026-03-22T12:53:57.300Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama)
+2026-03-22T12:53:57.301Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=Ollama)
+2026-03-22T12:53:57.301Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama.ai)
+2026-03-22T12:53:57.301Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=local-ollama)
+2026-03-22T12:53:57.302Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama-local)
+2026-03-22T12:53:57.372Z [debug] Copilot-related commands: github.copilot.llm-gateway.testConnection, workbench.action.output.show.extension-output-AndrewButson.github-copilot-llm-gateway-#1-GitHub Copilot LLM Gateway, github.copilot.debug.inlineEdit.pickProvider
+2026-03-22T12:53:57.373Z [info] Attempting command: github.copilot.llm-gateway.testConnection
+2026-03-22T12:53:57.387Z [info] Command call succeeded: github.copilot.llm-gateway.testConnection (vendor, provider)
+2026-03-22T12:53:57.387Z [info] Registration succeeded via Copilot command
+2026-03-23T09:19:49.358Z [debug] copilotExt.exports keys: getAPI
+2026-03-23T09:19:49.359Z [debug] exportsObj keys: getAPI
+2026-03-23T09:19:49.359Z [info] Detected getAPI export; attempting to call to obtain API object
+2026-03-23T09:19:49.360Z [debug] copilot API keys: _scopeSelector, _languageContextProviderService
+2026-03-23T09:19:49.360Z [info] register attempt 1
+2026-03-23T09:19:49.361Z [info] Detected vscode.lm.registerLanguageModelChatProvider; registering provider
+2026-03-23T09:19:49.361Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama)
+2026-03-23T09:19:49.361Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=Ollama)
+2026-03-23T09:19:49.361Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama.ai)
+2026-03-23T09:19:49.362Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=local-ollama)
+2026-03-23T09:19:49.362Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama-local)
+2026-03-23T09:19:49.463Z [debug] Copilot-related commands: github.copilot.debug.inlineEdit.pickProvider, github.copilot.llm-gateway.testConnection, workbench.action.output.show.extension-output-AndrewButson.github-copilot-llm-gateway-#1-GitHub Copilot LLM Gateway
+2026-03-23T09:19:49.463Z [info] Attempting command: github.copilot.debug.inlineEdit.pickProvider
+2026-03-23T09:19:49.464Z [info] Command call succeeded: github.copilot.debug.inlineEdit.pickProvider (vendor, provider)
+2026-03-23T09:19:49.465Z [info] Registration succeeded via Copilot command
+2026-03-23T09:20:11.015Z [debug] copilotExt.exports keys: getAPI
+2026-03-23T09:20:11.016Z [debug] exportsObj keys: getAPI
+2026-03-23T09:20:11.016Z [info] Detected getAPI export; attempting to call to obtain API object
+2026-03-23T09:20:11.016Z [debug] copilot API keys: _scopeSelector, _languageContextProviderService
+2026-03-23T09:20:11.017Z [info] register attempt 1
+2026-03-23T09:20:11.017Z [info] Detected vscode.lm.registerLanguageModelChatProvider; registering provider
+2026-03-23T09:20:11.017Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama)
+2026-03-23T09:20:11.018Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=Ollama)
+2026-03-23T09:20:11.018Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama.ai)
+2026-03-23T09:20:11.018Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=local-ollama)
+2026-03-23T09:20:11.019Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama-local)
+2026-03-23T09:20:11.084Z [debug] Copilot-related commands: github.copilot.debug.inlineEdit.pickProvider, github.copilot.llm-gateway.testConnection, workbench.action.output.show.extension-output-AndrewButson.github-copilot-llm-gateway-#1-GitHub Copilot LLM Gateway
+2026-03-23T09:20:11.084Z [info] Attempting command: github.copilot.debug.inlineEdit.pickProvider
+2026-03-23T09:20:11.085Z [info] Command call succeeded: github.copilot.debug.inlineEdit.pickProvider (vendor, provider)
+2026-03-23T09:20:11.085Z [info] Registration succeeded via Copilot command
+2026-03-23T10:02:50.904Z [debug] copilotExt.exports keys: getAPI
+2026-03-23T10:02:50.904Z [debug] exportsObj keys: getAPI
+2026-03-23T10:02:50.905Z [info] Detected getAPI export; attempting to call to obtain API object
+2026-03-23T10:02:50.905Z [debug] copilot API keys: _scopeSelector, _languageContextProviderService
+2026-03-23T10:02:50.906Z [info] register attempt 1
+2026-03-23T10:02:50.907Z [info] Detected vscode.lm.registerLanguageModelChatProvider; registering provider
+2026-03-23T10:02:50.908Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama)
+2026-03-23T10:02:50.908Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=Ollama)
+2026-03-23T10:02:50.908Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama.ai)
+2026-03-23T10:02:50.909Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=local-ollama)
+2026-03-23T10:02:50.909Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama-local)
+2026-03-23T10:02:51.030Z [debug] Copilot-related commands: github.copilot.debug.inlineEdit.pickProvider, github.copilot.llm-gateway.testConnection, workbench.action.output.show.extension-output-AndrewButson.github-copilot-llm-gateway-#1-GitHub Copilot LLM Gateway
+2026-03-23T10:02:51.031Z [info] Attempting command: github.copilot.debug.inlineEdit.pickProvider
+2026-03-23T10:02:51.032Z [info] Command call succeeded: github.copilot.debug.inlineEdit.pickProvider (vendor, provider)
+2026-03-23T10:02:51.032Z [info] Registration succeeded via Copilot command
+2026-03-23T10:09:25.770Z [debug] copilotExt.exports keys: getAPI
+2026-03-23T10:09:25.770Z [debug] exportsObj keys: getAPI
+2026-03-23T10:09:25.770Z [info] Detected getAPI export; attempting to call to obtain API object
+2026-03-23T10:09:25.771Z [debug] copilot API keys: _scopeSelector, _languageContextProviderService
+2026-03-23T10:09:25.771Z [info] register attempt 1
+2026-03-23T10:09:25.772Z [info] Detected vscode.lm.registerLanguageModelChatProvider; registering provider
+2026-03-23T10:09:25.772Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama)
+2026-03-23T10:09:25.772Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=Ollama)
+2026-03-23T10:09:25.773Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama.ai)
+2026-03-23T10:09:25.773Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=local-ollama)
+2026-03-23T10:09:25.773Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama-local)
+2026-03-23T10:09:25.896Z [debug] Copilot-related commands: github.copilot.debug.inlineEdit.pickProvider, github.copilot.llm-gateway.testConnection, workbench.action.output.show.extension-output-AndrewButson.github-copilot-llm-gateway-#1-GitHub Copilot LLM Gateway
+2026-03-23T10:09:25.897Z [info] Attempting command: github.copilot.debug.inlineEdit.pickProvider
+2026-03-23T10:09:25.897Z [info] Command call succeeded: github.copilot.debug.inlineEdit.pickProvider (vendor, provider)
+2026-03-23T10:09:25.898Z [info] Registration succeeded via Copilot command
+2026-03-23T17:33:07.839Z [debug] copilotExt.exports keys: getAPI
+2026-03-23T17:33:07.840Z [debug] exportsObj keys: getAPI
+2026-03-23T17:33:07.840Z [info] Detected getAPI export; attempting to call to obtain API object
+2026-03-23T17:33:07.841Z [debug] copilot API keys: _scopeSelector, _languageContextProviderService
+2026-03-23T17:33:07.841Z [info] register attempt 1
+2026-03-23T17:33:07.842Z [info] Detected vscode.lm.registerLanguageModelChatProvider; registering provider
+2026-03-23T17:33:07.842Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama)
+2026-03-23T17:33:07.842Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=Ollama)
+2026-03-23T17:33:07.843Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama.ai)
+2026-03-23T17:33:07.843Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=local-ollama)
+2026-03-23T17:33:07.844Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama-local)
+2026-03-23T17:33:07.954Z [debug] Copilot-related commands: github.copilot.debug.inlineEdit.pickProvider, github.copilot.llm-gateway.testConnection, workbench.action.output.show.extension-output-AndrewButson.github-copilot-llm-gateway-#1-GitHub Copilot LLM Gateway
+2026-03-23T17:33:07.954Z [info] Attempting command: github.copilot.debug.inlineEdit.pickProvider
+2026-03-23T17:33:07.955Z [info] Command call succeeded: github.copilot.debug.inlineEdit.pickProvider (vendor, provider)
+2026-03-23T17:33:07.955Z [info] Registration succeeded via Copilot command
+2026-04-10T06:41:37.280Z [debug] copilotExt.exports keys: getAPI
+2026-04-10T06:41:37.281Z [debug] exportsObj keys: getAPI
+2026-04-10T06:41:37.282Z [info] Detected getAPI export; attempting to call to obtain API object
+2026-04-10T06:41:37.282Z [debug] copilot API keys: _scopeSelector, _languageContextProviderService
+2026-04-10T06:41:37.282Z [info] register attempt 1
+2026-04-10T06:41:37.283Z [info] Detected vscode.lm.registerLanguageModelChatProvider; registering provider
+2026-04-10T06:41:37.283Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama)
+2026-04-10T06:41:37.284Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=Ollama)
+2026-04-10T06:41:37.284Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama.ai)
+2026-04-10T06:41:37.284Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=local-ollama)
+2026-04-10T06:41:37.285Z [info] Registered provider via vscode.lm.registerLanguageModelChatProvider (vendor=ollama-local)
+2026-04-10T06:41:37.377Z [debug] Copilot-related commands: github.copilot.debug.inlineEdit.pickProvider, github.copilot.llm-gateway.testConnection, workbench.action.output.show.extension-output-AndrewButson.github-copilot-llm-gateway-#1-GitHub Copilot LLM Gateway
+2026-04-10T06:41:37.378Z [info] Attempting command: github.copilot.debug.inlineEdit.pickProvider
+2026-04-10T06:41:37.378Z [info] Command call succeeded: github.copilot.debug.inlineEdit.pickProvider (vendor, provider)
+2026-04-10T06:41:37.378Z [info] Registration succeeded via Copilot command

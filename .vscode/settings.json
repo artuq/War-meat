@@ -1,0 +1,7 @@
+{
+    "godotTools.editorPath.godot4": "c:\\Users\\akure\\Desktop\\GRA\\Godot_v4.6-stable_win64.exe",
+    "files.watcherExclude": {
+        "**/*.tscn": true,
+        "**/.godot/**": true
+    }
+}
