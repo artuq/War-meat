@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://src/entities/loot/loot_drop.gd" id="1_loot"]
+[ext_resource type="Texture2D" path="res://assets/sprites/loot/coin.png" id="2_coin"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_loot"]
-radius = 4.0
+radius = 22.0
 
 [node name="LootDrop" type="Area2D"]
 collision_layer = 8
@@ -14,3 +15,6 @@ script = ExtResource("1_loot")
 shape = SubResource("CircleShape2D_loot")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_coin")
+texture_filter = 1
+scale = Vector2(0.22, 0.22)

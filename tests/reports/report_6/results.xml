@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-05-12" name="report_6" tests="48" failures="4" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="test_health_component" package="tests/unit" timestamp="2026-05-12T11:17:42" hostname="localhost" tests="16" failures="1" errors="0" skipped="0" flaky="0" time="0.132">
+		<testcase name="test_take_damage_reduces_hp" classname="test_health_component" time="0.001">
+		</testcase>
+		<testcase name="test_take_damage_cannot_go_below_zero" classname="test_health_component" time="0.007">
+		</testcase>
+		<testcase name="test_full_health_after_ready" classname="test_health_component" time="0.017">
+		</testcase>
+		<testcase name="test_heal_restores_hp" classname="test_health_component" time="0.016">
+		</testcase>
+		<testcase name="test_heal_cannot_exceed_max" classname="test_health_component" time="0.017">
+		</testcase>
+		<testcase name="test_heal_does_nothing_when_dead" classname="test_health_component" time="0.015">
+		</testcase>
+		<testcase name="test_set_max_clips_current_health" classname="test_health_component" time="0.016">
+		</testcase>
+		<testcase name="test_set_max_does_not_refill" classname="test_health_component" time="0.016">
+		</testcase>
+		<testcase name="test_emits_on_unit_hit_on_damage" classname="test_health_component" time="0.016">
+			<failure message="FAILED: res://tests/unit/test_health_component.gd:87" type="FAILURE">
+<![CDATA[
+Expecting:
+ '1'
+ but was
+ '0'
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+	<testsuite id="1" name="test_wave_data" package="tests/unit" timestamp="2026-05-12T11:17:42" hostname="localhost" tests="14" failures="1" errors="0" skipped="0" flaky="0" time="0.017">
+		<testcase name="test_wave_data_loaded_successfully" classname="test_wave_data" time="0.009">
+			<failure message="FAILED: res://tests/unit/test_wave_data.gd:17" type="FAILURE">
+<![CDATA[
+Expecting: not to be '<null>'
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+	<testsuite id="2" name="test_upgrade_system" package="tests/unit" timestamp="2026-05-12T11:17:42" hostname="localhost" tests="10" failures="2" errors="0" skipped="0" flaky="0" time="0.118">
+		<testcase name="test_upgrade_pool_not_empty" classname="test_upgrade_system" time="0.009">
+		</testcase>
+		<testcase name="test_all_upgrades_have_nonzero_value" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_all_upgrades_have_valid_id" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_all_rarities_represented" classname="test_upgrade_system" time="0.015">
+		</testcase>
+		<testcase name="test_add_run_upgrade_stores_bonus" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_add_multiple_same_type_accumulates" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_different_types_dont_interfere" classname="test_upgrade_system" time="0.015">
+			<failure message="FAILED: res://tests/unit/test_upgrade_system.gd:89" type="FAILURE">
+<![CDATA[
+Expecting:
+ '0.200000'
+ in range between
+ '0.099000' <> '0.101000'
+]]>
+			</failure>
+			<failure message="FAILED: res://tests/unit/test_upgrade_system.gd:91" type="FAILURE">
+<![CDATA[
+Expecting:
+ '0.200000'
+ in range between
+ '0.049000' <> '0.051000'
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+	<testsuite id="3" name="test_sanity" package="tests/unit" timestamp="2026-05-12T11:17:42" hostname="localhost" tests="8" failures="0" errors="0" skipped="0" flaky="0" time="0.134">
+		<testcase name="test_basic_math_passes" classname="test_sanity" time="0.008">
+		</testcase>
+		<testcase name="test_string_not_empty" classname="test_sanity" time="0.016">
+		</testcase>
+		<testcase name="test_array_contains" classname="test_sanity" time="0.015">
+		</testcase>
+		<testcase name="test_float_approx" classname="test_sanity" time="0.016">
+		</testcase>
+		<testcase name="test_bool_true" classname="test_sanity" time="0.015">
+		</testcase>
+		<testcase name="test_wave_data_loads" classname="test_sanity" time="0.016">
+		</testcase>
+		<testcase name="test_upgrade_data_pool_not_empty" classname="test_sanity" time="0.016">
+		</testcase>
+		<testcase name="test_health_component_new" classname="test_sanity" time="0.015">
+		</testcase>
+	</testsuite>
+</testsuites>

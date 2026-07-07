@@ -2,8 +2,8 @@
 class_name Squad
 extends Node2D
 
-@export var formation_spacing: float = 16.0
-@export var move_speed: float = 200.0
+@export var formation_spacing: float = 62.0
+@export var move_speed: float = 130.0
 
 const MAX_SOLDIERS: int = 4
 var soldier_scene: PackedScene = preload("res://src/entities/squad/soldier.tscn")
@@ -25,7 +25,7 @@ func _find_joystick() -> void:
 
 func _physics_process(delta: float) -> void:
 	if _joystick:
-		var direction := _joystick.get_direction()
+		var direction := _joystick.get_direction() * SettingsManager.joystick_sensitivity
 		if direction != Vector2.ZERO:
 			_move_squad(direction, delta)
 	_position_soldiers()
@@ -39,7 +39,8 @@ func _collect_soldiers() -> void:
 
 
 func _move_squad(direction: Vector2, delta: float) -> void:
-	global_position += direction * move_speed * delta
+	var speed_mult := 1.0 + GameManager.streak_speed_bonus
+	global_position += direction * move_speed * speed_mult * delta
 	# Clamp to arena boundaries
 	var arena := get_parent() as ArenaMap
 	if arena:
@@ -63,11 +64,15 @@ func _position_soldiers() -> void:
 
 
 func _get_formation_offsets(count: int) -> Array[Vector2]:
-	var offsets: Array[Vector2] = []
-	var start_x := -(count - 1) * formation_spacing / 2.0
-	for i in count:
-		offsets.append(Vector2(start_x + i * formation_spacing, 0))
-	return offsets
+	# Staggered cluster — soldiers are never in a single horizontal line.
+	# Diagonally offset so the squad has depth and width simultaneously.
+	var s := formation_spacing * 0.5
+	match count:
+		1: return [Vector2(0, 0)]
+		2: return [Vector2(-s, -s * 0.4), Vector2(s, s * 0.4)]
+		3: return [Vector2(0, -s * 0.8), Vector2(-s, s * 0.5), Vector2(s, s * 0.5)]
+		_: return [Vector2(-s, -s * 0.5), Vector2(s, -s * 0.5),
+		           Vector2(-s, s * 0.5),  Vector2(s,  s * 0.5)]
 
 
 func _on_soldier_died(soldier: Node2D) -> void:

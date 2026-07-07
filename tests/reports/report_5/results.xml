@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-05-12" name="report_5" tests="14" failures="1" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="test_wave_data" package="tests/unit" timestamp="2026-05-12T11:03:03" hostname="localhost" tests="14" failures="1" errors="0" skipped="0" flaky="0" time="0.008">
+		<testcase name="test_wave_data_loaded_successfully" classname="test_wave_data" time="0.002">
+			<failure message="FAILED: res://tests/unit/test_wave_data.gd:17" type="FAILURE">
+<![CDATA[
+Expecting: not to be '<null>'
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>

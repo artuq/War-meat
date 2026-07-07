@@ -20,7 +20,7 @@ static func create_assault() -> SoldierClass:
 	c.class_type = ClassType.ASSAULT
 	c.class_name_str = "Szturmowiec"
 	c.base_hp = 100
-	c.base_speed = 80.0
+	c.base_speed = 55.0
 	c.damage_mult = 1.0
 	c.default_weapon_type = WeaponData.Type.RIFLE
 	c.draw_color = Color(0.3, 0.5, 0.9)
@@ -34,7 +34,7 @@ static func create_sniper() -> SoldierClass:
 	c.class_type = ClassType.SNIPER
 	c.class_name_str = "Snajper"
 	c.base_hp = 60
-	c.base_speed = 65.0
+	c.base_speed = 45.0
 	c.damage_mult = 1.8
 	c.default_weapon_type = WeaponData.Type.SNIPER_RIFLE
 	c.draw_color = Color(0.9, 0.8, 0.2)
@@ -48,7 +48,7 @@ static func create_medic() -> SoldierClass:
 	c.class_type = ClassType.MEDIC
 	c.class_name_str = "Medyk"
 	c.base_hp = 80
-	c.base_speed = 75.0
+	c.base_speed = 50.0
 	c.damage_mult = 0.6
 	c.default_weapon_type = WeaponData.Type.PISTOL
 	c.draw_color = Color(0.2, 0.85, 0.4)
@@ -81,7 +81,7 @@ static func create_engineer() -> SoldierClass:
 	c.class_type = ClassType.ENGINEER
 	c.class_name_str = "Inżynier"
 	c.base_hp = 90
-	c.base_speed = 70.0
+	c.base_speed = 48.0
 	c.damage_mult = 0.8
 	c.default_weapon_type = WeaponData.Type.SHOTGUN
 	c.draw_color = Color(0.9, 0.5, 0.1)
@@ -95,7 +95,7 @@ static func create_scout() -> SoldierClass:
 	c.class_type = ClassType.SCOUT
 	c.class_name_str = "Zwiadowca"
 	c.base_hp = 55
-	c.base_speed = 110.0
+	c.base_speed = 72.0
 	c.damage_mult = 1.2
 	c.default_weapon_type = WeaponData.Type.SMG
 	c.draw_color = Color(0.4, 0.9, 0.9)
@@ -109,7 +109,7 @@ static func create_heavy() -> SoldierClass:
 	c.class_type = ClassType.HEAVY
 	c.class_name_str = "Ciężki"
 	c.base_hp = 160
-	c.base_speed = 50.0
+	c.base_speed = 35.0
 	c.damage_mult = 1.4
 	c.default_weapon_type = WeaponData.Type.SHOTGUN
 	c.draw_color = Color(0.6, 0.3, 0.3)

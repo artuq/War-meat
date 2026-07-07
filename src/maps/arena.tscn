@@ -4,19 +4,27 @@
 [ext_resource type="PackedScene" path="res://src/entities/squad/squad.tscn" id="2_squad"]
 [ext_resource type="Script" uid="uid://clp4sckhodx3o" path="res://src/systems/wave_manager.gd" id="3_wave"]
 [ext_resource type="Script" uid="uid://bcql22sxx8paj" path="res://src/systems/loot_spawner.gd" id="4_loot_spawner"]
-[ext_resource type="PackedScene" path="res://src/ui/hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" uid="uid://dd5bfg8ksfnuk" path="res://src/ui/hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://src/ui/shop_ui.tscn" id="6_shop"]
+[ext_resource type="PackedScene" path="res://src/ui/upgrade_panel.tscn" id="6_upgrade"]
 [ext_resource type="PackedScene" path="res://src/ui/game_over_ui.tscn" id="7_gameover"]
 [ext_resource type="PackedScene" path="res://src/ui/stats_panel.tscn" id="8_stats"]
+[ext_resource type="Script" path="res://src/systems/screen_shake.gd" id="9_shake"]
+[ext_resource type="Script" path="res://src/systems/hit_stop.gd" id="10_hitstop"]
+[ext_resource type="Script" path="res://src/systems/kill_streak.gd" id="11_streak"]
 
 [node name="Arena" type="Node2D" unique_id=858080805]
 script = ExtResource("1_arena")
+
 
 [node name="Squad" parent="." unique_id=1219489989 instance=ExtResource("2_squad")]
 
 [node name="Camera2D" type="Camera2D" parent="Squad" unique_id=1873750101]
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
+
+[node name="ScreenShake" type="Node" parent="Squad/Camera2D"]
+script = ExtResource("9_shake")
 
 [node name="WaveManager" type="Node" parent="." unique_id=154187135]
 script = ExtResource("3_wave")
@@ -31,6 +39,14 @@ script = ExtResource("4_loot_spawner")
 
 [node name="ShopUI" parent="." unique_id=1279464645 instance=ExtResource("6_shop")]
 
+[node name="UpgradePanel" parent="." instance=ExtResource("6_upgrade")]
+
 [node name="GameOverUI" parent="." unique_id=542658318 instance=ExtResource("7_gameover")]
 
 [node name="StatsPanel" parent="." unique_id=812040773 instance=ExtResource("8_stats")]
+
+[node name="HitStop" type="Node" parent="."]
+script = ExtResource("10_hitstop")
+
+[node name="KillStreak" type="CanvasLayer" parent="."]
+script = ExtResource("11_streak")

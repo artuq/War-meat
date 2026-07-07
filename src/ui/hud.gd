@@ -7,7 +7,7 @@ extends CanvasLayer
 @onready var wave_label: Label = $TopRight/WaveLabel
 @onready var timer_label: Label = $TopRight/TimerLabel
 @onready var joystick: VirtualJoystick = $VirtualJoystick
-@onready var stats_button: Button = $StatsButton
+@onready var pause_button: Button = $PauseButton
 
 var _total_max_hp: int = 0
 var _total_hp: int = 0
@@ -17,6 +17,7 @@ var _wave_manager: Node = null
 
 func _ready() -> void:
 	EventBus.wave_started.connect(_on_wave_started)
+	EventBus.wave_cleared.connect(_on_wave_cleared)
 	EventBus.loot_collected.connect(_on_loot_collected)
 	EventBus.item_purchased.connect(_on_item_purchased)
 	EventBus.shop_closed.connect(_on_shop_closed)
@@ -24,12 +25,12 @@ func _ready() -> void:
 	EventBus.soldier_damaged.connect(_on_soldier_damaged)
 	EventBus.xp_gained.connect(_on_xp_gained)
 	EventBus.level_up.connect(_on_level_up)
-	stats_button.pressed.connect(_on_stats_pressed)
 	_update_gold(0)
 	_update_wave(0, 5)
 	timer_label.text = ""
 	call_deferred("_update_hp_bar")
 	call_deferred("_find_wave_manager")
+	pause_button.pressed.connect(_on_pause_pressed)
 
 
 func _process(_delta: float) -> void:
@@ -54,6 +55,15 @@ func get_joystick() -> VirtualJoystick:
 
 func _on_wave_started(wave_number: int) -> void:
 	_update_wave(wave_number, GameManager.total_waves)
+
+
+func _on_wave_cleared(wave_number: int) -> void:
+	# Show upcoming wave number during shop phase
+	var next_wave: int = wave_number + 1
+	if next_wave <= GameManager.total_waves:
+		wave_label.text = "NASTĘPNA: WAVE %d" % next_wave
+	else:
+		wave_label.text = "OSTATNIA FALA!"
 
 
 func _on_loot_collected(_value: int) -> void:
@@ -120,7 +130,8 @@ func _update_xp_bar() -> void:
 		xp_bar.value = GameManager.xp
 
 
-func _on_stats_pressed() -> void:
-	var stats_panel := get_tree().current_scene.get_node_or_null("StatsPanel")
-	if stats_panel and stats_panel.has_method("toggle"):
-		stats_panel.toggle()
+func _on_pause_pressed() -> void:
+	var pause_menu_scene := preload("res://src/ui/pause_menu.tscn")
+	var menu := pause_menu_scene.instantiate()
+	get_tree().current_scene.add_child(menu)
+	get_tree().paused = true

@@ -1,0 +1,65 @@
+GIMP Palette
+Name: War Meat v3
+Columns: 8
+# War Meat — oficjalna paleta 42 kolorow + transparent
+# Plik importowalny w Aseprite i GIMP
+# Uzycie: Image > Color Mode > Indexed > Import this palette
+#
+# SKORA
+242 210 169	#f2d2a9 skin-light
+196 149 106	#c4956a skin-shadow
+# MUNDUR GRACZA
+ 90 110  58	#5a6e3a player-olive-base
+ 61  74  40	#3d4a28 player-olive-shadow
+139 115  85	#8b7355 player-camo
+# MUNDUR WROGA
+122  58  58	#7a3a3a enemy-red-base
+ 90  42  42	#5a2a2a enemy-red-shadow
+# EKWIPUNEK / METAL
+107 107 107	#6b6b6b equip-gray-base
+ 74  74  74	#4a4a4a equip-gray-shadow
+140 140 140	#8c8c8c equip-gray-highlight
+# DREWNO
+139 105  20	#8b6914 wood-base
+107  90  20	#6b5a14 wood-shadow
+# EFEKTY / OGIEN
+255 204   0	#ffcc00 fire-light
+255 102   0	#ff6600 fire-dark
+# KREW / ALERT
+204   0   0	#cc0000 blood-light
+139   0   0	#8b0000 blood-dark
+# BIALE / FLASHA
+255 255 255	#ffffff white
+# ZLOTO / LOOT
+255 215   0	#ffd700 gold-light
+184 134  11	#b8860b gold-shadow
+# HP BAR
+ 68 204  68	#44cc44 hp-green
+204  68  68	#cc4444 hp-red
+# TEREN
+212 200 154	#d4c89a sand
+ 90 122  58	#5a7a3a grass
+122 122 122	#7a7a7a concrete
+107  90  58	#6b5a3a dirt
+# OUTLINE
+ 26  26  46	#1a1a2e outline-dark
+# AKCENTY KLAS
+160 132  92	#a0845c beret
+224 112  32	#e07020 engineer-stripe
+ 42  74 122	#2a4a7a heavy-armor-base
+ 74 110 158	#4a6e9e heavy-armor-highlight
+# WARIANTY WROGOW
+184  90  42	#b85a2a rusher-orange
+ 90  58 106	#5a3a6a tank-purple
+ 58  90 122	#3a5a7a shooter-blue
+139 122  42	#8b7a2a grenadier-olive
+# UI SCI-FI
+ 30  30  46	#1e1e2e ui-panel-main
+ 37  37  48	#252530 ui-panel-alt
+ 58  58  78	#3a3a4e ui-border-dark
+ 85  85 112	#555570 ui-border-light
+ 74 158 255	#4a9eff ui-xp-blue
+136 204 255	#88ccff ui-blue-highlight
+# TIER HIGHLIGHTS
+136 170  85	#88aa55 tier-green
+136  85 102	#885566 tier-purple

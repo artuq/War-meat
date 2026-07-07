@@ -18,10 +18,13 @@ func _ready() -> void:
 
 func _draw() -> void:
 	if is_crit:
-		draw_circle(Vector2.ZERO, 3.5, Color(1.0, 0.2, 0.1))
-		draw_circle(Vector2.ZERO, 2.0, Color(1.0, 0.85, 0.1))
+		# Crit: bright red-orange with white core — clearly dangerous
+		draw_circle(Vector2.ZERO, 4.0, Color(1.0, 0.3, 0.1))
+		draw_circle(Vector2.ZERO, 2.2, Color(1.0, 1.0, 0.8))
 	else:
-		draw_circle(Vector2.ZERO, 2.0, Color(1.0, 0.95, 0.3))
+		# Normal: cyan-blue tracer — visually distinct from yellow coins
+		draw_circle(Vector2.ZERO, 2.5, Color(0.3, 0.8, 1.0))
+		draw_circle(Vector2.ZERO, 1.2, Color(0.9, 1.0, 1.0))
 
 
 func _physics_process(delta: float) -> void:
@@ -31,4 +34,10 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies") and body.has_method("take_damage"):
 		body.take_damage(damage)
+		# Knockback — odpycha wroga od miejsca trafienia
+		if body.has_method("_apply_knockback"):
+			var kb_dir := (body.global_position - global_position).normalized()
+			body._apply_knockback(kb_dir, 90.0)
+		var sparks := ParticleFactory.create_hit_sparks(global_position)
+		get_tree().current_scene.add_child(sparks)
 		queue_free()

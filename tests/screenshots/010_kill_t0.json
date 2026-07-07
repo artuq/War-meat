@@ -1,0 +1,103 @@
+{
+  "elapsed": 7.74476546666665,
+  "enemies": [
+    {
+      "hp": 12,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -134.737686157227,
+        25.09153175354
+      ],
+      "type": 0
+    },
+    {
+      "hp": 12,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -0.268599271774292,
+        -192.30549621582
+      ],
+      "type": 0
+    },
+    {
+      "hp": 0,
+      "is_dying": true,
+      "knockback_power": 90.0,
+      "pos": [
+        -249.107192993164,
+        37.1670303344727
+      ],
+      "type": 0
+    },
+    {
+      "hp": 12,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -267.133758544922,
+        99.7508926391602
+      ],
+      "type": 0
+    }
+  ],
+  "frame_index": 10,
+  "game": {
+    "current_wave": 1,
+    "enemies_killed": 3,
+    "gold": 26,
+    "is_mission_active": true,
+    "level": 1,
+    "passives_count": 0,
+    "streak_damage_bonus": 0.0,
+    "streak_speed_bonus": 0.0,
+    "xp": 24
+  },
+  "label": "kill_t0",
+  "metrics": {
+    "avg_enemy_separation": 267.745966593424,
+    "enemies_overlap_soldier": 0,
+    "enemies_with_knockback": 0,
+    "enemies_within_18px": 0,
+    "enemy_count": 3,
+    "min_enemy_separation": 151.995864868164,
+    "projectile_count": 1,
+    "soldier_count": 1
+  },
+  "projectiles": [
+    {
+      "damage": 8,
+      "dir": [
+        0.0471305996179581,
+        0.998888790607452
+      ],
+      "is_crit": false,
+      "pos": [
+        -224.269714355469,
+        162.666976928711
+      ]
+    }
+  ],
+  "soldiers": [
+    {
+      "class": "?",
+      "hp": 100,
+      "is_invulnerable": false,
+      "max_hp": 100,
+      "pos": [
+        -237.4912109375,
+        -94.7223052978516
+      ]
+    }
+  ],
+  "timestamp_ms": 10397,
+  "ui": {
+    "hud_visible": true,
+    "paused": false,
+    "preview_card_state": "none",
+    "shop_visible": false,
+    "stats_panel_open": false,
+    "upgrade_panel_visible": false
+  }
+}

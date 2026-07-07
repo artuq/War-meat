@@ -1,0 +1,15 @@
+[settings]
+# Katalogi z testami
+test_root_paths = "res://tests/unit/,res://tests/integration/"
+
+# Timeout jednego testu w ms
+test_timeout = 5000
+
+# Ile raportów zachować
+report_count = 5
+
+# Pełne logi
+verbose = true
+
+# Katalog raportów (relative do projektu)
+report_directory = "tests/reports"

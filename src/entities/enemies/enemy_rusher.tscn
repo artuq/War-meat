@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b4s2jlyjvqsul"]
+
+[ext_resource type="PackedScene" uid="uid://yy12u5j1bky6" path="res://src/entities/enemies/enemy.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://dyh1itn6lpele" path="res://assets/sprites/enemies/Rusher.png" id="2_tex"]
+
+[sub_resource type="CircleShape2D" id="CS_body"]
+radius = 4.0
+
+[node name="EnemyRusher" unique_id=1253999032 instance=ExtResource("1_base")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=981902465]
+shape = SubResource("CS_body")
+
+[node name="BodySprite" parent="." index="1" unique_id=1545007612]
+texture = ExtResource("2_tex")
+
+[node name="Shadow" parent="BodySprite" index="0" unique_id=979933823]
+position = Vector2(0, -5)

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-05-12" name="report_10" tests="48" failures="1" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="test_health_component" package="tests/unit" timestamp="2026-05-12T11:22:27" hostname="localhost" tests="16" failures="1" errors="0" skipped="0" flaky="0" time="0.147">
+		<testcase name="test_take_damage_reduces_hp" classname="test_health_component" time="0.004">
+		</testcase>
+		<testcase name="test_take_damage_cannot_go_below_zero" classname="test_health_component" time="0.003">
+		</testcase>
+		<testcase name="test_full_health_after_ready" classname="test_health_component" time="0.013">
+		</testcase>
+		<testcase name="test_heal_restores_hp" classname="test_health_component" time="0.016">
+		</testcase>
+		<testcase name="test_heal_cannot_exceed_max" classname="test_health_component" time="0.016">
+		</testcase>
+		<testcase name="test_heal_does_nothing_when_dead" classname="test_health_component" time="0.016">
+		</testcase>
+		<testcase name="test_set_max_clips_current_health" classname="test_health_component" time="0.015">
+		</testcase>
+		<testcase name="test_set_max_does_not_refill" classname="test_health_component" time="0.016">
+		</testcase>
+		<testcase name="test_emits_on_unit_hit_on_damage" classname="test_health_component" time="0.015">
+		</testcase>
+		<testcase name="test_emits_on_unit_died_when_hp_zero" classname="test_health_component" time="0.015">
+			<failure message="FAILED: res://tests/unit/test_health_component.gd:97" type="FAILURE">
+<![CDATA[
+Expecting:
+ '1'
+ but was
+ '0'
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+	<testsuite id="1" name="test_wave_data" package="tests/unit" timestamp="2026-05-12T11:22:27" hostname="localhost" tests="14" failures="0" errors="0" skipped="0" flaky="0" time="0.233">
+		<testcase name="test_wave_data_loaded_successfully" classname="test_wave_data" time="0.007">
+		</testcase>
+		<testcase name="test_has_five_enemy_types" classname="test_wave_data" time="0.016">
+		</testcase>
+		<testcase name="test_covers_waves_1_to_5" classname="test_wave_data" time="0.016">
+		</testcase>
+		<testcase name="test_grenadier_has_nonzero_weight" classname="test_wave_data" time="0.016">
+		</testcase>
+		<testcase name="test_grunt_appears_from_wave_1" classname="test_wave_data" time="0.015">
+		</testcase>
+		<testcase name="test_rusher_appears_from_wave_2" classname="test_wave_data" time="0.016">
+		</testcase>
+		<testcase name="test_tank_appears_from_wave_3" classname="test_wave_data" time="0.016">
+		</testcase>
+		<testcase name="test_shooter_appears_from_wave_3" classname="test_wave_data" time="0.015">
+		</testcase>
+		<testcase name="test_grenadier_appears_from_wave_4" classname="test_wave_data" time="0.016">
+		</testcase>
+		<testcase name="test_wave1_pick_only_returns_grunt" classname="test_wave_data" time="0.016">
+		</testcase>
+		<testcase name="test_pick_returns_valid_type_wave_3" classname="test_wave_data" time="0.015">
+		</testcase>
+		<testcase name="test_pick_never_returns_grenadier_on_wave_3" classname="test_wave_data" time="0.016">
+		</testcase>
+		<testcase name="test_wave_duration_increases_per_wave" classname="test_wave_data" time="0.015">
+		</testcase>
+		<testcase name="test_spawn_interval_has_valid_range" classname="test_wave_data" time="0.015">
+		</testcase>
+	</testsuite>
+	<testsuite id="2" name="test_upgrade_system" package="tests/unit" timestamp="2026-05-12T11:22:27" hostname="localhost" tests="10" failures="0" errors="0" skipped="0" flaky="0" time="0.168">
+		<testcase name="test_upgrade_pool_not_empty" classname="test_upgrade_system" time="0.006">
+		</testcase>
+		<testcase name="test_all_upgrades_have_nonzero_value" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_all_upgrades_have_valid_id" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_all_rarities_represented" classname="test_upgrade_system" time="0.015">
+		</testcase>
+		<testcase name="test_add_run_upgrade_stores_bonus" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_add_multiple_same_type_accumulates" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_different_types_dont_interfere" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_run_bonuses_cleared_on_mission_start" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_rarity_color_common_is_gray" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_rarity_weight_common_highest" classname="test_upgrade_system" time="0.016">
+		</testcase>
+	</testsuite>
+	<testsuite id="3" name="test_sanity" package="tests/unit" timestamp="2026-05-12T11:22:27" hostname="localhost" tests="8" failures="0" errors="0" skipped="0" flaky="0" time="0.133">
+		<testcase name="test_basic_math_passes" classname="test_sanity" time="0.009">
+		</testcase>
+		<testcase name="test_string_not_empty" classname="test_sanity" time="0.016">
+		</testcase>
+		<testcase name="test_array_contains" classname="test_sanity" time="0.015">
+		</testcase>
+		<testcase name="test_float_approx" classname="test_sanity" time="0.016">
+		</testcase>
+		<testcase name="test_bool_true" classname="test_sanity" time="0.015">
+		</testcase>
+		<testcase name="test_wave_data_loads" classname="test_sanity" time="0.015">
+		</testcase>
+		<testcase name="test_upgrade_data_pool_not_empty" classname="test_sanity" time="0.016">
+		</testcase>
+		<testcase name="test_health_component_new" classname="test_sanity" time="0.015">
+		</testcase>
+	</testsuite>
+</testsuites>

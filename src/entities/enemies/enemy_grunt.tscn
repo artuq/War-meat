@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://di848t3fxbqbt"]
+
+[ext_resource type="PackedScene" uid="uid://yy12u5j1bky6" path="res://src/entities/enemies/enemy.tscn" id="1_base"]
+[ext_resource type="Script" path="res://src/components/shadow_sprite.gd" id="2_ny8ph"]
+
+[sub_resource type="CircleShape2D" id="CS_body"]
+radius = 5.0
+
+[node name="EnemyGrunt" unique_id=1953008053 instance=ExtResource("1_base")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=981902465]
+shape = SubResource("CS_body")
+
+[node name="Shadow" parent="BodySprite" parent_id_path=PackedInt32Array(1545007612) index="0" unique_id=979933823]
+position = Vector2(2, -5)
+script = ExtResource("2_ny8ph")

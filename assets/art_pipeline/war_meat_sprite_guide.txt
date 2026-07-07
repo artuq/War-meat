@@ -1,0 +1,124 @@
+═══════════════════════════════════════
+WAR MEAT — SPRITE REFERENCE GUIDE
+Plik wiedzy (knowledge file) dla Gem AI
+═══════════════════════════════════════
+
+Ten dokument to OBOWIĄZKOWY reference. Każdy wygenerowany sprite MUSI być z nim zgodny.
+
+═══ KIERUNKI (ANIMATION ROWS) ═══
+
+W sprite sheetach kierunki ułożone są w wierszach:
+  Wiersz 1: NORTH — postać tyłem (widać plecy, plecak, tył hełmu)
+  Wiersz 2: EAST  — profil prawy (broń po prawej stronie)
+  Wiersz 3: SOUTH — postać przodem (widać przód kamizelki, ale NIE twarz — top-down!)
+  Wiersz 4: WEST  — profil lewy (lustrzane odbicie EAST)
+
+WAŻNE: W perspektywie TOP-DOWN (90° z góry) zawsze widać CZUBEK GŁOWY/HEŁMU, nie twarz.
+
+═══ TYPY ANIMACJI ═══
+
+  IDLE:   4 klatki — subtelne oddychanie, lekkie kołysanie broni
+  WALK:   4 klatki — naprzemienne nogi, ruch ramion, broń stabilna
+  SHOOT:  3 klatki — celowanie → strzał (muzzle flash #ffcc00) → odrzut
+  DEATH:  5 klatek — trafienie (flash) → upadek → leżenie na ziemi
+  HIT:    2 klatki — biały flash (#ffffff overlay) → odrzut do tyłu
+
+═══ PROPORCJE POSTACI (w 32×32) ═══
+
+  ┌──────────────────────────────────┐
+  │           (puste)                │  ← 2-3px margines góra
+  │         ┌───────┐               │
+  │         │ HEŁM  │ 8-9px szer.   │  ← czubek głowy widziany z góry
+  │         └───┬───┘               │
+  │        ┌────┴────┐              │
+  │        │ TUŁÓW   │ 10-12px      │  ← kamizelka, ramiona
+  │     ┌──┤         ├──────┐       │
+  │     │BR│         │      │       │  ← broń wystaje 4-6px
+  │     └──┤         ├──────┘       │
+  │        └────┬────┘              │
+  │          ┌──┴──┐                │
+  │          │NOGI │ 4-5px          │
+  │          └─────┘                │
+  │           (puste)               │  ← 1-2px margines dół
+  └──────────────────────────────────┘
+  
+  Postać wycentrowana w kafelku.
+  1px outline (#1a1a2e) wokół CAŁEJ sylwetki.
+
+═══ RÓŻNICE MIĘDZY KLASAMI ═══
+
+BAZOWA SYLWETKA jest IDENTYCZNA dla wszystkich klas.
+Różnice TYLKO w 3 elementach: nakrycie głowy, broń, detal.
+
+SZTURMOWIEC (Assault):
+  • Głowa: standardowy hełm (#6b6b6b)
+  • Broń: karabin — średnia lufa (8px), korpus #4a4a4a
+  • Detal: 2-3 piksele magazynków na kamizelce (#4a4a4a)
+
+SNAJPER (Sniper):
+  • Głowa: beret (#a0845c) zamiast hełmu — okrągły, płaski, 1px niższy
+  • Broń: karabin snajperski — długa lufa (+4px = 12px), 1px jasny punkt = luneta
+  • Detal: cienki pasek broni widoczny z góry
+
+MEDYK (Medic):
+  • Głowa: standardowy hełm
+  • Broń: pistolet — krótka lufa (4px)
+  • Detal: biały krzyż 3×3px (#ffffff) na plecach, torba medyczna (2×3px, #ffffff + #cc4444) z boku
+
+INŻYNIER (Engineer):
+  • Głowa: hełm z pomarańczowym paskiem (#e07020) — 1px linia na czubku
+  • Broń: strzelba — szeroka krótka lufa (5px długa, 3px szeroka)
+  • Detal: narzędzia na plecach (2-3px #8c8c8c)
+
+ZWIADOWCA (Scout):
+  • Głowa: ciemna chusta (#3d4a28) — bardziej dopasowana niż hełm, bez wypukłości
+  • Broń: SMG — kompaktowy (6px lufa, wąski korpus)
+  • Detal: BRAK kamizelki — widać mundur (#5a6e3a) bezpośrednio, lżejsza sylwetka
+
+═══ WROGOWIE ═══
+
+IDENTYCZNA technika rysowania jak żołnierze gracza.
+JEDYNA RÓŻNICA: paleta munduru:
+  • Baza: #7a3a3a (ciemna czerwień) zamiast #5a6e3a
+  • Cień: #5a2a2a zamiast #3d4a28
+  • Ekwipunek: #5c5c5c (ciemniejszy szary)
+
+Typy wrogów:
+  GRUNT — bazowy, karabin, brak detali
+  RUSHER — brak broni, szybki, nóż (2px #8c8c8c)
+  TANK — większy (używa pełne 32×32), ciężki ekwipunek, tarcza
+  STRZELEC — stoi, karabin jak snajperka
+  GRANATNIK — duża broń (granatnik), cięższa sylwetka
+
+BOSS — 64×64px (wyjątek od 32×32!), ten sam styl ale większy i z unikalnymi detalami.
+
+═══ PRZEDMIOTY ═══
+
+Rozmiar: 16×16px wycentrowany w kafelku 32×32.
+Styl: prosty, czytelny, 1px outline.
+
+  BROŃ (weapon drop): miniatura broni, korpus + lufa
+  APTECZKA: biały prostokąt + czerwony krzyż
+  ZŁOTO (coin): okrągły, #ffd700 baza, #b8860b cień
+  PANCERZ: szary prostokąt z detalem
+  PASYWKA: mały kwadrat 12×12 w kolorze pasywki z ikoną
+
+═══ KAFELKI TERENU ═══
+
+Rozmiar: 32×32px, MUSZĄ być tileable (seamless edges).
+
+  PIASEK: #d4c89a baza, sporadyczne ciemniejsze piksele
+  TRAWA: #5a7a3a baza, ciemniejsze piksele jako detale
+  BETON: #7a7a7a baza, linie przerw co 8px
+  ZIEMIA: #6b5a3a baza, drobne kamyki
+
+═══ CZEGO NIGDY NIE ROBIĆ ═══
+
+✕ Antyaliasing / wygładzone krawędzie
+✕ Gradienty / płynne przejścia kolorów  
+✕ Kolory spoza palety
+✕ Tekst / litery / cyfry na sprite'ach
+✕ Cały sprite sheet naraz (generuj klatka po klatce!)
+✕ Perspektywa inna niż top-down 90°
+✕ Rozmiar inny niż 32×32 (wyjątek: boss 64×64, przedmiot 16×16)
+✕ Twarz widoczna z góry (patrzymy z bird's eye view)

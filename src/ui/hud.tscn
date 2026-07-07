@@ -21,16 +21,16 @@ offset_right = 180.0
 offset_bottom = 46.0
 
 [node name="HPBar" parent="TopLeft" unique_id=194651191 instance=ExtResource("3_hp")]
-custom_minimum_size = Vector2(160, 14)
+custom_minimum_size = Vector2(160, 20)
 layout_mode = 2
 
 [node name="LVLabel" type="Label" parent="TopLeft" unique_id=221917748]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 12
 text = "LV.1"
 
 [node name="XPBar" type="ProgressBar" parent="TopLeft" unique_id=1328936364]
-custom_minimum_size = Vector2(160, 8)
+custom_minimum_size = Vector2(160, 12)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_xp_bg")
 max_value = 50.0
@@ -57,14 +57,14 @@ text = "0"
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -100.0
+offset_left = -180.0
 offset_top = 6.0
 offset_right = -8.0
 offset_bottom = 50.0
 
 [node name="WaveLabel" type="Label" parent="TopRight" unique_id=1714820837]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 13
 text = "WAVE 0"
 horizontal_alignment = 2
 
@@ -73,15 +73,19 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 2
 
-[node name="VirtualJoystick" parent="." unique_id=906361577 instance=ExtResource("2_joy")]
-layout_mode = 3
-
-[node name="StatsButton" type="Button" parent="." unique_id=275888307]
+[node name="PauseButton" type="Button" parent="." unique_id=1234567890]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -70.0
-offset_top = 54.0
+offset_left = -52.0
+offset_top = 52.0
 offset_right = -8.0
-offset_bottom = 78.0
-text = "STATS"
+offset_bottom = 96.0
+custom_minimum_size = Vector2(44, 44)
+theme_override_font_sizes/font_size = 18
+text = "⏸"
+
+[node name="VirtualJoystick" parent="." unique_id=906361577 instance=ExtResource("2_joy")]
+layout_mode = 3
+
+

@@ -1,12 +1,31 @@
 ## HubScreen — ekran główny: wybór areny, ulepszenia, klasy
 extends CanvasLayer
 
-@onready var tab_container: TabContainer = $Panel/TabContainer
-@onready var arena_list: VBoxContainer = $Panel/TabContainer/Areny/ArenaList
-@onready var upgrade_list: VBoxContainer = $Panel/TabContainer/Ulepszenia/ScrollContainer/UpgradeList
-@onready var class_list: VBoxContainer = $Panel/TabContainer/Klasy/ScrollContainer/ClassList
-@onready var resources_label: Label = $Panel/ResourcesLabel
+const TAB_NAMES: Array[String] = ["ARENY", "ULEPSZENIA", "KLASY"]
 
+# --- UI PALETTE (metallic military) ---
+const COL_OUTLINE := Color("#1a1a2e")
+const COL_NAVBAR_BG := Color("#1e1e2e")
+const COL_TAB_INACTIVE := Color("#1e1e2e")
+const COL_TAB_ACTIVE := Color("#252530")
+const COL_TAB_HOVER := Color("#3a3a4e")
+const COL_BORDER_DARK := Color("#3a3a4e")
+const COL_BORDER_LIGHT := Color("#555570")
+const COL_RIVET := Color("#6b6b6b")
+const COL_RIVET_HIGHLIGHT := Color("#8c8c8c")
+const COL_TEXT := Color("#ffffff")
+const COL_TEXT_DIM := Color("#e0e0e0")
+
+@onready var nav_bar: PanelContainer = $Panel/VBox/NavBar
+@onready var tab_buttons: HBoxContainer = $Panel/VBox/NavBar/TabButtons
+@onready var arena_list: VBoxContainer = $Panel/VBox/Content/ArenaContent
+@onready var upgrade_list: VBoxContainer = $Panel/VBox/Content/UpgradeContent/UpgradeList
+@onready var class_list: VBoxContainer = $Panel/VBox/Content/ClassContent/ClassList
+@onready var resources_label: Label = $Panel/VBox/ResourcesLabel
+
+var _content_pages: Array[Control] = []
+var _tab_btns: Array[Button] = []
+var _current_tab: int = 0
 var _arenas: Array[ArenaModifier] = []
 
 const CLASS_UNLOCK_MAP: Dictionary = {
@@ -28,7 +47,17 @@ func _ready() -> void:
 		ArenaModifier.create_desert(),
 		ArenaModifier.create_bunker(),
 	]
+	_content_pages = [
+		$Panel/VBox/Content/ArenaContent,
+		$Panel/VBox/Content/UpgradeContent,
+		$Panel/VBox/Content/ClassContent,
+	]
+	_style_navbar()
+	_build_tab_buttons()
+	_switch_tab(0)
 	_refresh_all()
+	# Hub music
+	SoundManager.play_music("hub")
 
 
 func _refresh_all() -> void:
@@ -36,6 +65,135 @@ func _refresh_all() -> void:
 	_build_arena_list()
 	_build_upgrade_list()
 	_build_class_list()
+
+
+# --- METALLIC NAVBAR STYLE ---
+
+func _style_navbar() -> void:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = COL_NAVBAR_BG
+	# 1px dark outline
+	sb.border_color = COL_OUTLINE
+	sb.border_width_left = 1
+	sb.border_width_right = 1
+	sb.border_width_top = 1
+	sb.border_width_bottom = 1
+	# Beveled top edge (lighter line)
+	sb.corner_radius_top_left = 2
+	sb.corner_radius_top_right = 2
+	sb.corner_radius_bottom_left = 1
+	sb.corner_radius_bottom_right = 1
+	# Inner shadow at bottom for depth
+	sb.shadow_color = COL_BORDER_DARK
+	sb.shadow_size = 1
+	sb.shadow_offset = Vector2(0, 1)
+	sb.content_margin_left = 6.0
+	sb.content_margin_right = 6.0
+	sb.content_margin_top = 3.0
+	sb.content_margin_bottom = 3.0
+	nav_bar.add_theme_stylebox_override("panel", sb)
+	# Draw rivets on both ends
+	nav_bar.draw.connect(_draw_rivets)
+
+
+func _draw_rivets() -> void:
+	var sz := nav_bar.size
+	var rivet_y := sz.y * 0.5
+	# Left side rivets
+	_draw_rivet(nav_bar, Vector2(8, rivet_y))
+	_draw_rivet(nav_bar, Vector2(18, rivet_y))
+	# Right side rivets
+	_draw_rivet(nav_bar, Vector2(sz.x - 8, rivet_y))
+	_draw_rivet(nav_bar, Vector2(sz.x - 18, rivet_y))
+
+
+func _draw_rivet(ctrl: Control, pos: Vector2) -> void:
+	ctrl.draw_circle(pos, 2.5, COL_RIVET)
+	ctrl.draw_circle(pos + Vector2(-0.5, -0.5), 1.0, COL_RIVET_HIGHLIGHT)
+
+
+func _make_tab_style(active: bool, hover: bool = false) -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	if active:
+		sb.bg_color = COL_TAB_ACTIVE
+		# Top accent border (military green tint)
+		sb.border_color = COL_BORDER_LIGHT
+		sb.border_width_top = 2
+		sb.border_width_left = 1
+		sb.border_width_right = 1
+		sb.border_width_bottom = 0
+	elif hover:
+		sb.bg_color = COL_TAB_HOVER
+		sb.border_color = COL_BORDER_DARK
+		sb.border_width_top = 1
+		sb.border_width_left = 1
+		sb.border_width_right = 1
+		sb.border_width_bottom = 0
+	else:
+		sb.bg_color = COL_TAB_INACTIVE
+		sb.border_color = COL_BORDER_DARK
+		sb.border_width_top = 0
+		sb.border_width_left = 0
+		sb.border_width_right = 0
+		sb.border_width_bottom = 0
+	sb.corner_radius_top_left = 2
+	sb.corner_radius_top_right = 2
+	sb.content_margin_left = 4.0
+	sb.content_margin_right = 4.0
+	sb.content_margin_top = 2.0
+	sb.content_margin_bottom = 2.0
+	return sb
+
+
+# --- CUSTOM TABS ---
+
+func _build_tab_buttons() -> void:
+	for child in tab_buttons.get_children():
+		child.queue_free()
+	_tab_btns.clear()
+
+	for i in TAB_NAMES.size():
+		var btn := Button.new()
+		btn.text = TAB_NAMES[i]
+		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.custom_minimum_size = Vector2(0, 32)
+		btn.add_theme_font_size_override("font_size", 11)
+		btn.add_theme_color_override("font_color", COL_TEXT_DIM)
+		btn.add_theme_color_override("font_hover_color", COL_TEXT)
+		btn.add_theme_color_override("font_pressed_color", COL_TEXT)
+		btn.add_theme_stylebox_override("normal", _make_tab_style(false))
+		btn.add_theme_stylebox_override("hover", _make_tab_style(false, true))
+		btn.add_theme_stylebox_override("pressed", _make_tab_style(true))
+		btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+		btn.mouse_entered.connect(_on_tab_hover.bind(i, true))
+		btn.mouse_exited.connect(_on_tab_hover.bind(i, false))
+		btn.pressed.connect(_switch_tab.bind(i))
+		tab_buttons.add_child(btn)
+		_tab_btns.append(btn)
+
+
+func _apply_tab_styles() -> void:
+	for i in _tab_btns.size():
+		var btn := _tab_btns[i]
+		var active := (i == _current_tab)
+		btn.add_theme_stylebox_override("normal", _make_tab_style(active))
+		btn.add_theme_stylebox_override("hover", _make_tab_style(active, not active))
+		btn.add_theme_stylebox_override("pressed", _make_tab_style(true))
+		btn.add_theme_color_override("font_color", COL_TEXT if active else COL_TEXT_DIM)
+
+
+func _switch_tab(idx: int) -> void:
+	_current_tab = idx
+	for i in _content_pages.size():
+		_content_pages[i].visible = (i == idx)
+	_apply_tab_styles()
+	nav_bar.queue_redraw()
+
+
+func _on_tab_hover(idx: int, entered: bool) -> void:
+	if idx == _current_tab:
+		return
+	nav_bar.queue_redraw()
 
 
 # --- ARENY ---

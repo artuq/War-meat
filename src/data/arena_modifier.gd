@@ -18,7 +18,8 @@ extends Resource
 @export var spawn_rate_mult: float = 1.0  ## multiplier on spawn interval (lower = more enemies)
 @export var wave_duration_mult: float = 1.0  ## multiplier on wave time
 
-## Enemy pool weights (Grunt, Rusher, Tank)
+## DEPRECATED — enemy pool weights moved to WaveData (.tres). Te pola są ignorowane
+## przez wave_manager. Per-arena distribution można dodać przez osobny WaveData.tres.
 @export var grunt_weight: float = 0.55
 @export var rusher_weight: float = 0.30
 @export var tank_weight: float = 0.15

@@ -12,7 +12,7 @@
 | **Gatunek** | Roguelite arena-survivor / Auto-battler (inspiracja: Brotato, Vampire Survivors) |
 | **Platforma** | Mobile (Android) — landscape 640×360 |
 | **Widok** | Top-down 2D |
-| **Styl graficzny** | Pixel art / Sprity 2D |
+| **Styl graficzny** | High-res Pixel Art (à la Enter the Gungeon / Dead Cells) — sprite source 128 px, render w grze ~25 px, Linear texture filter |
 | **Tryb gry** | Singleplayer |
 | **Sterowanie** | Wirtualny joystick (mobile) / Klik-to-move (PC) |
 
@@ -227,14 +227,45 @@ Sklep jest dostępny między falami w trakcie misji. Oferuje:
 
 | Gra | Co bierzemy |
 |-----|-------------|
-| **Brotato** | Core loop arena-survivor, auto-strzelanie, sklep między falami, siatka ekwipunku |
+| **Brotato** | Core loop arena-survivor, auto-strzelanie, sklep między falami, siatka ekwipunku, juicy SFX |
 | **Vampire Survivors** | Czasowe przetrwanie fal, rosnąca potęga, setki wrogów na ekranie |
-| **Cannon Fodder** | Dowodzenie oddziałem, klimat wojskowy, pixel art |
+| **Cannon Fodder** | Dowodzenie oddziałem, klimat wojskowy, pixel art, krótkie krzyki śmierci |
 | **Battlefield** | System klas, różnorodność broni, klimat wojskowy |
 
 ---
 
-## 8. Zakres MVP (Minimalny Grywalny Produkt)
+## 8. Audio
+
+> Szczegółowy plan: [AUDIO_PLAN.md](AUDIO_PLAN.md)
+
+### 8.1 Filozofia audio
+
+Brotato-style juiciness + Cannon Fodder militarny klimat. Każda akcja gracza musi mieć natychmiastowy, satysfakcjonujący dźwiękowy feedback. Generacja w SUNO AI, obróbka w Audacity/ffmpeg, pitch-randomization w Godocie.
+
+### 8.2 Kluczowe systemy
+
+| System | Opis |
+|--------|------|
+| **Pitch Randomization** | Każdy strzał/trafienie z ±10% pitch shift + losowy wariant (1 z 3). Zapobiega monotonii |
+| **Voice Limiting** | Max 4 strzały + 8 trafień jednocześnie. Priorytetyzacja (UI > Voice > Weapon > Impact) |
+| **Dynamic Music** | 2 warstwy per arena (base + intense). Crossfade na bazie intensity (wrogowie × fala × boss) |
+| **Low HP Effect** | Poniżej 20% HP: low-pass filter, heartbeat loop, music duck -6dB |
+| **Haptic Feedback** | Wibracje Android powiązane z eksplozjami, bossami, level upem |
+| **Loot Pitch Ramp** | Kolejne monety zbierane pod rząd mają rosnący pitch (+0.05 do max 1.5×) |
+
+### 8.3 Podsumowanie assetów audio
+
+| Kategoria | Ilość | Priorytet |
+|-----------|-------|-----------|
+| SFX Walki | ~45 | P0 |
+| SFX UI/Feedback | ~20 | P1 |
+| Muzyka | ~12 tracków | P2 |
+| SFX Polish | ~8 | P3 |
+| **RAZEM** | **~85** | |
+
+---
+
+## 9. Zakres MVP (Minimalny Grywalny Produkt)
 
 Aby zweryfikować koncept gry, MVP powinien zawierać:
 

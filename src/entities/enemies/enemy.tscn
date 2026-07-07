@@ -1,16 +1,37 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://yy12u5j1bky6"]
 
-[ext_resource type="Script" path="res://src/entities/enemies/enemy.gd" id="1_enemy"]
+[ext_resource type="Script" uid="uid://c87urpmk87co3" path="res://src/entities/enemies/enemy.gd" id="1_enemy"]
+[ext_resource type="Texture2D" uid="uid://x7ha3xs6ci7b" path="res://assets/sprites/enemies/Grunt.png" id="2_bxar5"]
+[ext_resource type="Script" uid="uid://yg61nec1vnjl" path="res://src/components/health_component.gd" id="3_hc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_coll"]
 radius = 5.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vision"]
+radius = 14.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1019876656]
 collision_layer = 2
-collision_mask = 17
+collision_mask = 19
 script = ExtResource("1_enemy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981902465]
 shape = SubResource("CircleShape2D_coll")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="BodySprite" type="Sprite2D" parent="." unique_id=1545007612]
+texture = ExtResource("2_bxar5")
+
+[node name="Shadow" type="Sprite2D" parent="BodySprite" unique_id=979933823]
+show_behind_parent = true
+position = Vector2(0, -20)
+
+[node name="VisionArea" type="Area2D" parent="." unique_id=1780790818]
+collision_layer = 4
+collision_mask = 4
+
+[node name="VisionShape" type="CollisionShape2D" parent="VisionArea" unique_id=1194662150]
+shape = SubResource("CircleShape2D_vision")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1718626724]
+script = ExtResource("3_hc")
+max_health = 30

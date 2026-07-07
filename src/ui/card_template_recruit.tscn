@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://bp7eumkay7unt"]
+
+[ext_resource type="Script" uid="uid://dypwh5q0foesy" path="res://src/ui/shop_card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://thjbo1iut0jv" path="res://assets/sprites/ui/cards/shop/recruit_medic.png" id="2_ref"]
+
+[sub_resource type="StyleBoxFlat" id="SB_btn"]
+bg_color = Color(0.15, 0.15, 0.18, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.35, 0.4, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="SB_btn_pressed"]
+bg_color = Color(0.1, 0.1, 0.13, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5, 0.5, 0.6, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="SB_btn_hover"]
+bg_color = Color(0.22, 0.22, 0.28, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6, 0.6, 0.7, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="CardTemplateRecruit" type="PanelContainer" unique_id=1744065015]
+custom_minimum_size = Vector2(130, 175)
+size_flags_horizontal = 0
+script = ExtResource("1_card")
+
+[node name="BgImage" type="TextureRect" parent="." unique_id=339634525]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_ref")
+expand_mode = 1
+
+[node name="Layout" type="Control" parent="." unique_id=2134371858]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Layout" unique_id=1866211705]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 14.0
+offset_right = 121.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 9
+text = "Medyk"
+vertical_alignment = 1
+
+[node name="DescLabel" type="RichTextLabel" parent="Layout" unique_id=28973311]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 120.0
+offset_right = 125.0
+offset_bottom = 145.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 7
+theme_override_font_sizes/bold_font_size = 8
+bbcode_enabled = true
+text = "HP 80, Leczy oddział
+Pistolet"
+scroll_active = false
+
+[node name="BuyButton" type="Button" parent="Layout" unique_id=203449442]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 146.0
+offset_right = 91.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("SB_btn")
+theme_override_styles/pressed = SubResource("SB_btn_pressed")
+theme_override_styles/hover = SubResource("SB_btn_hover")
+text = "$150"
+
+[node name="LockButton" type="Button" parent="Layout" unique_id=2012300422]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 146.0
+offset_right = 118.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("SB_btn")
+theme_override_styles/pressed = SubResource("SB_btn_pressed")
+theme_override_styles/hover = SubResource("SB_btn_hover")
+text = "🔓"

@@ -12,4 +12,5 @@ func _on_loot_dropped(position: Vector2, value: int) -> void:
 	var drop: LootDrop = loot_scene.instantiate()
 	drop.value = value
 	drop.global_position = position
-	get_tree().current_scene.add_child(drop)
+	# call_deferred — add_child podczas physics flush powoduje "Can't change state"
+	get_tree().current_scene.call_deferred("add_child", drop)

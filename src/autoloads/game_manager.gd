@@ -40,6 +40,21 @@ const SAVE_PATH: String = "user://warmeat_save.json"
 # --- Statystyki misji ---
 var enemies_killed: int = 0
 var gold_earned: int = 0
+var max_streak: int = 0
+var mission_time: float = 0.0
+var _mission_start_ms: int = 0
+
+# --- Kill streak bonusy (tymczasowe, resetowane przy końcu serii) ---
+var streak_speed_bonus: float = 0.0    # +% do prędkości squadu
+var streak_damage_bonus: float = 0.0   # +% do obrażeń żołnierzy
+
+# --- Upgrade Panel rewards (per-run, między falami) ---
+# Mapuje UpgradeData.StatType (int) → skumulowana wartość
+var run_stat_bonuses: Dictionary = {}
+
+# --- Mid-run restore ---
+var restoring_run: bool = false
+var run_data: Dictionary = {}
 
 # --- Ekwipunek (pasywne sloty) ---
 const BASE_PASSIVE_SLOTS: int = 8
@@ -54,6 +69,7 @@ func _ready() -> void:
 	EventBus.enemy_killed.connect(_on_enemy_killed)
 	EventBus.mission_won.connect(_on_mission_won)
 	EventBus.mission_lost.connect(_on_mission_lost)
+	EventBus.squad_wiped.connect(_on_squad_wiped)
 	load_game()
 
 
@@ -69,6 +85,12 @@ func start_mission(waves: int = 5) -> void:
 	xp_to_next_level = 50
 	passive_items.clear()
 	active_synergies.clear()
+	max_streak = 0
+	streak_speed_bonus = 0.0
+	streak_damage_bonus = 0.0
+	run_stat_bonuses.clear()
+	mission_time = 0.0
+	_mission_start_ms = Time.get_ticks_msec()
 	is_mission_active = true
 	EventBus.mission_started.emit()
 
@@ -111,6 +133,19 @@ func get_passive_bonus(stat_type: PassiveItem.StatType) -> float:
 		if p.stat_type == stat_type:
 			total += p.stat_value
 	return total
+
+
+## Dodaje upgrade z UpgradePanel — kumuluje per-run bonus dla danego stat type
+func add_run_upgrade(upgrade: UpgradeData) -> void:
+	if upgrade == null:
+		return
+	var key: int = int(upgrade.stat_type)
+	run_stat_bonuses[key] = run_stat_bonuses.get(key, 0.0) + upgrade.stat_value
+	apply_passives_to_squad()
+
+
+func get_run_bonus(stat_type: int) -> float:
+	return run_stat_bonuses.get(stat_type, 0.0)
 
 
 func _update_synergies() -> void:
@@ -162,6 +197,17 @@ func _apply_passives_to_soldier(s: Soldier) -> void:
 	# Apply weapon stat passives (range, fire_rate) via multipliers
 	s.range_mult = 1.0 + get_passive_bonus(PassiveItem.StatType.RANGE)
 	s.fire_rate_mult = 1.0 + get_passive_bonus(PassiveItem.StatType.FIRE_RATE)
+	s.hp_regen_per_10s = get_passive_bonus(PassiveItem.StatType.HP_REGEN)
+
+	# Apply Upgrade Panel run bonuses (additive na top of passives)
+	s.damage_mult *= 1.0 + get_run_bonus(UpgradeData.StatType.DAMAGE)
+	s.move_speed *= 1.0 + get_run_bonus(UpgradeData.StatType.SPEED)
+	s.max_hp += int(get_run_bonus(UpgradeData.StatType.MAX_HP))
+	s.luck += get_run_bonus(UpgradeData.StatType.LUCK)
+	s.range_mult *= 1.0 + get_run_bonus(UpgradeData.StatType.RANGE)
+	s.fire_rate_mult *= 1.0 + get_run_bonus(UpgradeData.StatType.FIRE_RATE)
+	s.armor += int(get_run_bonus(UpgradeData.StatType.ARMOR))
+	s.hp_regen_per_10s += get_run_bonus(UpgradeData.StatType.HP_REGEN)
 	if s.weapon:
 		s._apply_weapon()
 
@@ -227,12 +273,19 @@ func _on_enemy_killed(_enemy: Node2D, _position: Vector2) -> void:
 
 func _on_mission_won() -> void:
 	is_mission_active = false
+	mission_time = (Time.get_ticks_msec() - _mission_start_ms) / 1000.0
 	save_game()
 
 
 func _on_mission_lost() -> void:
 	is_mission_active = false
+	mission_time = (Time.get_ticks_msec() - _mission_start_ms) / 1000.0
 	save_game()
+
+
+func _on_squad_wiped() -> void:
+	if is_mission_active:
+		EventBus.mission_lost.emit()
 
 
 # --- Ulepszenia permanentne ---

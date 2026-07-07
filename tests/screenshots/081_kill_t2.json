@@ -1,0 +1,213 @@
+{
+  "elapsed": 46.9154196055546,
+  "enemies": [
+    {
+      "hp": 5,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -256.371215820312,
+        -475.142517089844
+      ],
+      "type": 0
+    },
+    {
+      "hp": 1,
+      "is_dying": false,
+      "knockback_power": 24.4963493729505,
+      "pos": [
+        -88.9648056030273,
+        -489.024597167969
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -182.704650878906,
+        -372.499694824219
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -233.615447998047,
+        -393.170806884766
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -65.1513061523438,
+        -495.531005859375
+      ],
+      "type": 0
+    },
+    {
+      "hp": 9,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -223.895111083984,
+        -488.561767578125
+      ],
+      "type": 1
+    },
+    {
+      "hp": 0,
+      "is_dying": true,
+      "knockback_power": 90.0,
+      "pos": [
+        -245.11946105957,
+        -494.539642333984
+      ],
+      "type": 1
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -168.996368408203,
+        -699.20263671875
+      ],
+      "type": 0
+    }
+  ],
+  "frame_index": 81,
+  "game": {
+    "current_wave": 2,
+    "enemies_killed": 31,
+    "gold": 216,
+    "is_mission_active": true,
+    "level": 3,
+    "passives_count": 0,
+    "streak_damage_bonus": 0.0,
+    "streak_speed_bonus": 0.0,
+    "xp": 98
+  },
+  "label": "kill_t2",
+  "metrics": {
+    "avg_enemy_separation": 163.864836193266,
+    "enemies_overlap_soldier": 0,
+    "enemies_with_knockback": 1,
+    "enemies_within_18px": 0,
+    "enemy_count": 7,
+    "min_enemy_separation": 24.6863555908203,
+    "projectile_count": 6,
+    "soldier_count": 2
+  },
+  "projectiles": [
+    {
+      "damage": 8,
+      "dir": [
+        -0.204475179314613,
+        -0.978871762752533
+      ],
+      "is_crit": false,
+      "pos": [
+        -241.283294677734,
+        -1150.71301269531
+      ]
+    },
+    {
+      "damage": 6,
+      "dir": [
+        -0.755727589130402,
+        -0.65488612651825
+      ],
+      "is_crit": false,
+      "pos": [
+        -478.838500976562,
+        -915.340759277344
+      ]
+    },
+    {
+      "damage": 6,
+      "dir": [
+        0.530269384384155,
+        0.847829163074493
+      ],
+      "is_crit": false,
+      "pos": [
+        110.978469848633,
+        -193.209686279297
+      ]
+    },
+    {
+      "damage": 6,
+      "dir": [
+        0.810586154460907,
+        0.585619449615479
+      ],
+      "is_crit": false,
+      "pos": [
+        133.753921508789,
+        -325.783081054688
+      ]
+    },
+    {
+      "damage": 8,
+      "dir": [
+        0.27691525220871,
+        0.960894405841827
+      ],
+      "is_crit": false,
+      "pos": [
+        -254.004547119141,
+        -433.851806640625
+      ]
+    },
+    {
+      "damage": 16,
+      "dir": [
+        0.218592718243599,
+        0.975816130638123
+      ],
+      "is_crit": true,
+      "pos": [
+        -269.705230712891,
+        -520.882690429688
+      ]
+    }
+  ],
+  "soldiers": [
+    {
+      "class": "?",
+      "hp": 100,
+      "is_invulnerable": false,
+      "max_hp": 120,
+      "pos": [
+        -272.837615966797,
+        -563.293090820312
+      ]
+    },
+    {
+      "class": "?",
+      "hp": 90,
+      "is_invulnerable": false,
+      "max_hp": 110,
+      "pos": [
+        -213.493194580078,
+        -539.555358886719
+      ]
+    }
+  ],
+  "timestamp_ms": 75630,
+  "ui": {
+    "hud_visible": true,
+    "paused": false,
+    "preview_card_state": "set",
+    "shop_visible": false,
+    "stats_panel_open": false,
+    "upgrade_panel_visible": false
+  }
+}

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-05-12" name="report_1" tests="41" failures="3" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="test_health_component" package="tests/unit" timestamp="2026-05-12T10:57:17" hostname="localhost" tests="17" failures="0" errors="17" skipped="0" flaky="0" time="0.268">
+		<testcase name="test_take_damage_reduces_hp" classname="test_health_component" time="0.004">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:15" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:15
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_take_damage_cannot_go_below_zero" classname="test_health_component" time="0.006">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:19" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:19
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_full_health_after_setup" classname="test_health_component" time="0.017">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:23" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid access to property or key 'current_health' on a base object of type 'Nil'.'
+	at res://tests/unit/test_health_component.gd:23
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_heal_restores_hp" classname="test_health_component" time="0.016">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:28" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:28
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_heal_cannot_exceed_max" classname="test_health_component" time="0.016">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:33" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'heal' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:33
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_heal_does_nothing_when_dead" classname="test_health_component" time="0.016">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:37" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:37
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_set_max_clips_current_health" classname="test_health_component" time="0.016">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:44" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:44
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_set_max_does_not_refill" classname="test_health_component" time="0.017">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:49" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:49
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_emits_on_unit_hit_on_damage" classname="test_health_component" time="0.015">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:57" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:57
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_emits_on_unit_died_when_hp_zero" classname="test_health_component" time="0.015">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:62" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:62
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_does_not_emit_died_on_partial_damage" classname="test_health_component" time="0.016">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:67" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:67
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_emits_health_changed_on_damage" classname="test_health_component" time="0.016">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:72" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:72
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_emits_health_changed_on_heal" classname="test_health_component" time="0.015">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:76" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:76
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_is_alive_true_when_hp_above_zero" classname="test_health_component" time="0.015">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:84" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'is_alive' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:84
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_is_alive_false_when_hp_zero" classname="test_health_component" time="0.016">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:87" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:87
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_health_ratio_full" classname="test_health_component" time="0.015">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:93" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'get_health_ratio' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:93
+]]>
+			</error>
+		</testcase>
+		<testcase name="test_health_ratio_half" classname="test_health_component" time="0.015">
+			<error message="ERROR: res://tests/unit/test_health_component.gd:96" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+Error: 'Invalid call. Nonexistent function 'take_damage' in base 'Nil'.'
+	at res://tests/unit/test_health_component.gd:96
+]]>
+			</error>
+		</testcase>
+	</testsuite>
+	<testsuite id="1" name="test_wave_data" package="tests/unit" timestamp="2026-05-12T10:57:17" hostname="localhost" tests="14" failures="1" errors="0" skipped="0" flaky="0" time="0.016">
+		<testcase name="test_wave_data_loaded_successfully" classname="test_wave_data" time="0.005">
+			<failure message="FAILED: res://tests/unit/test_wave_data.gd:17" type="FAILURE">
+<![CDATA[
+Expecting: not to be '<null>'
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+	<testsuite id="2" name="test_upgrade_system" package="tests/unit" timestamp="2026-05-12T10:57:17" hostname="localhost" tests="10" failures="2" errors="0" skipped="0" flaky="0" time="0.118">
+		<testcase name="test_upgrade_pool_not_empty" classname="test_upgrade_system" time="0.008">
+		</testcase>
+		<testcase name="test_all_upgrades_have_nonzero_value" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_all_upgrades_have_valid_id" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_all_rarities_represented" classname="test_upgrade_system" time="0.015">
+		</testcase>
+		<testcase name="test_add_run_upgrade_stores_bonus" classname="test_upgrade_system" time="0.015">
+		</testcase>
+		<testcase name="test_add_multiple_same_type_accumulates" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_different_types_dont_interfere" classname="test_upgrade_system" time="0.015">
+			<failure message="FAILED: res://tests/unit/test_upgrade_system.gd:87" type="FAILURE">
+<![CDATA[
+Expecting:
+ '0.200000'
+ in range between
+ '0.099000' <> '0.101000'
+]]>
+			</failure>
+			<failure message="FAILED: res://tests/unit/test_upgrade_system.gd:89" type="FAILURE">
+<![CDATA[
+Expecting:
+ '0.200000'
+ in range between
+ '0.049000' <> '0.051000'
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>

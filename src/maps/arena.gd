@@ -1,4 +1,5 @@
-## ArenaMap — dynamicznie generowana arena (Brotato-style)
+## ArenaMap — orchiestracja areny: setup wizualny + delegacja narracji/save/audio
+## Wcześniej: 309 linii i 7 odpowiedzialności. Teraz: ~140 linii, czysta orkiestracja.
 class_name ArenaMap
 extends Node2D
 
@@ -10,8 +11,7 @@ var modifier: ArenaModifier = null
 @onready var wave_manager: Node = $WaveManager
 @onready var camera: Camera2D = $Squad/Camera2D
 
-var _dialog_box_scene: PackedScene = preload("res://src/ui/dialog_box.tscn")
-var _dialog_box: DialogBox = null
+var _narrative: ArenaNarrative = null
 
 
 func _ready() -> void:
@@ -19,27 +19,36 @@ func _ready() -> void:
 		modifier = GameManager.current_arena
 	if modifier:
 		arena_size = modifier.arena_size
-	_create_floor()
-	_create_debris()
-	_create_boundaries()
+	_build_visuals()
 	if modifier and modifier.has_exploding_barrels:
-		_create_barrels()
+		_spawn_barrels()
 	GameManager.start_mission(wave_manager.total_waves)
 	wave_manager.setup(self)
 	if modifier:
 		wave_manager.set_modifier(modifier)
-	# Apply player speed modifier
-	if modifier and modifier.player_speed_mult != 1.0:
-		for s in get_tree().get_nodes_in_group("squad"):
-			if s is Soldier:
-				s.move_speed *= modifier.player_speed_mult
-	# Show briefing before starting waves
-	_show_briefing()
-	# Connect boss dialog
+	_apply_player_modifier()
+	# Setup narrative pipeline
+	_narrative = ArenaNarrative.new()
+	_narrative.arena_id = modifier.arena_id if modifier else "jungle"
+	add_child(_narrative)
+	# Restore mid-run state if continuing
+	if GameManager.restoring_run:
+		_restore_run()
+		_setup_music()
+	else:
+		# Music starts after briefing cutscene ends (no blip before duck)
+		_narrative.briefing_done.connect(wave_manager.start)
+		_narrative.briefing_done.connect(_setup_music, CONNECT_ONE_SHOT)
+		_narrative.show_briefing()
+	# Connect end-game flows
 	EventBus.all_waves_cleared.connect(_on_all_waves_cleared)
+	EventBus.squad_wiped.connect(_on_squad_wiped)
 
 
-func _create_floor() -> void:
+# --- Visual setup ---
+
+func _build_visuals() -> void:
+	# Floor — single ColorRect spanning whole arena
 	var floor_color: Color = modifier.floor_color if modifier else Color(0.55, 0.55, 0.50)
 	var floor_rect := ColorRect.new()
 	floor_rect.color = floor_color
@@ -48,35 +57,18 @@ func _create_floor() -> void:
 	floor_rect.z_index = -10
 	add_child(floor_rect)
 
-
-func _create_debris() -> void:
-	var half := arena_size / 2.0
+	# Debris — single Node2D w/ batched _draw zamiast 300 ColorRectów
+	var debris := DebrisLayer.new()
+	add_child(debris)
 	var debris_count: int = modifier.debris_count if modifier else 300
-	var debris_colors: Array = []
-	if modifier and not modifier.debris_colors.is_empty():
-		debris_colors = modifier.debris_colors
-	else:
-		debris_colors = [
-			Color(0.42, 0.42, 0.38),
-			Color(0.48, 0.46, 0.40),
-			Color(0.38, 0.36, 0.33),
-			Color(0.50, 0.48, 0.44),
-		]
-	for i in debris_count:
-		var debris := ColorRect.new()
-		var size_val := randf_range(2.0, 6.0)
-		debris.size = Vector2(size_val, size_val * randf_range(0.6, 1.4))
-		debris.color = debris_colors[randi() % debris_colors.size()]
-		debris.position = Vector2(
-			randf_range(-half.x + 40, half.x - 40),
-			randf_range(-half.y + 40, half.y - 40)
-		)
-		debris.z_index = -9
-		debris.rotation = randf_range(0, TAU)
-		add_child(debris)
+	var debris_colors: Array = modifier.debris_colors if (modifier and not modifier.debris_colors.is_empty()) else []
+	debris.generate(arena_size, debris_count, debris_colors)
+
+	# Boundary walls
+	_build_walls()
 
 
-func _create_boundaries() -> void:
+func _build_walls() -> void:
 	var half := arena_size / 2.0
 	var wall_color: Color = modifier.wall_color if modifier else Color(0.3, 0.3, 0.3)
 	var walls_data := [
@@ -95,7 +87,6 @@ func _create_boundaries() -> void:
 		rect.size = data["size"]
 		shape.shape = rect
 		body.add_child(shape)
-		# Visual
 		var vis := ColorRect.new()
 		vis.color = wall_color
 		vis.size = data["size"]
@@ -104,7 +95,56 @@ func _create_boundaries() -> void:
 		add_child(body)
 
 
-func get_edge_spawn_position() -> Vector2:
+func _spawn_barrels() -> void:
+	var half := arena_size / 2.0
+	var count: int = modifier.barrel_count if modifier else 0
+	for i in count:
+		var barrel := ExplodingBarrel.new()
+		barrel.position = Vector2(
+			randf_range(-half.x + 80, half.x - 80),
+			randf_range(-half.y + 80, half.y - 80)
+		)
+		add_child(barrel)
+
+
+func _apply_player_modifier() -> void:
+	if modifier and modifier.player_speed_mult != 1.0:
+		for s in get_tree().get_nodes_in_group("squad"):
+			if s is Soldier:
+				s.move_speed *= modifier.player_speed_mult
+
+
+func _setup_music() -> void:
+	var arena_id: String = modifier.arena_id if modifier else "jungle"
+	SoundManager.play_music_layered(arena_id + "_base", arena_id + "_intense", 2.0)
+
+
+# --- Spawn helpers (used by wave_manager) ---
+
+func get_camera_edge_spawn_position() -> Vector2:
+	if not is_instance_valid(camera):
+		return _get_random_edge_position()
+	var cam_pos: Vector2 = camera.global_position
+	var view_half := Vector2(640.0, 360.0) / (2.0 * camera.zoom)
+	var spawn_margin := 60.0
+	var half := arena_size / 2.0
+	var side := randi() % 4
+	var pos := Vector2.ZERO
+	match side:
+		0:
+			pos = Vector2(cam_pos.x + randf_range(-view_half.x, view_half.x), cam_pos.y - view_half.y - spawn_margin)
+		1:
+			pos = Vector2(cam_pos.x + randf_range(-view_half.x, view_half.x), cam_pos.y + view_half.y + spawn_margin)
+		2:
+			pos = Vector2(cam_pos.x - view_half.x - spawn_margin, cam_pos.y + randf_range(-view_half.y, view_half.y))
+		3:
+			pos = Vector2(cam_pos.x + view_half.x + spawn_margin, cam_pos.y + randf_range(-view_half.y, view_half.y))
+	pos.x = clampf(pos.x, -half.x + 20, half.x - 20)
+	pos.y = clampf(pos.y, -half.y + 20, half.y - 20)
+	return pos
+
+
+func _get_random_edge_position() -> Vector2:
 	var half := arena_size / 2.0
 	var margin := 40.0
 	var side := randi() % 4
@@ -125,97 +165,33 @@ func get_random_spawn_position() -> Vector2:
 	)
 
 
-func _create_barrels() -> void:
-	var half := arena_size / 2.0
-	var count: int = modifier.barrel_count if modifier else 0
-	for i in count:
-		var barrel := Area2D.new()
-		barrel.collision_layer = 0
-		barrel.collision_mask = 4  # projectiles
-		barrel.position = Vector2(
-			randf_range(-half.x + 80, half.x - 80),
-			randf_range(-half.y + 80, half.y - 80)
-		)
-		barrel.add_to_group("barrels")
-		var shape := CollisionShape2D.new()
-		var circle := CircleShape2D.new()
-		circle.radius = 12.0
-		shape.shape = circle
-		barrel.add_child(shape)
-		barrel.area_entered.connect(_on_barrel_hit.bind(barrel))
-		barrel.body_entered.connect(_on_barrel_hit_body.bind(barrel))
-		add_child(barrel)
-		barrel.set_meta("alive", true)
-		# Visual — red/orange barrel
-		var vis := _BarrelVisual.new()
-		barrel.add_child(vis)
-
-
-func _on_barrel_hit(_area: Area2D, barrel: Area2D) -> void:
-	_explode_barrel(barrel)
-
-
-func _on_barrel_hit_body(_body: Node2D, barrel: Area2D) -> void:
-	_explode_barrel(barrel)
-
-
-func _explode_barrel(barrel: Area2D) -> void:
-	if not barrel.get_meta("alive", false):
-		return
-	barrel.set_meta("alive", false)
-	# Damage nearby enemies
-	var explosion_radius := 60.0
-	var explosion_damage := 30
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if is_instance_valid(enemy) and enemy is Enemy:
-			if barrel.global_position.distance_to(enemy.global_position) < explosion_radius:
-				enemy.take_damage(explosion_damage)
-	# Damage nearby soldiers
-	for s in get_tree().get_nodes_in_group("squad"):
-		if is_instance_valid(s) and s is Soldier:
-			if barrel.global_position.distance_to(s.global_position) < explosion_radius:
-				s.take_damage(15)
-	barrel.queue_free()
-
-
-## Simple barrel visual (red circle with orange outline)
-class _BarrelVisual extends Node2D:
-	func _draw() -> void:
-		draw_circle(Vector2.ZERO, 12.0, Color(0.7, 0.2, 0.1))
-		draw_circle(Vector2.ZERO, 8.0, Color(0.9, 0.4, 0.1))
-		draw_circle(Vector2.ZERO, 3.0, Color(0.2, 0.2, 0.2))
-
-
-# --- Narracja ---
-
-func _show_briefing() -> void:
-	var arena_id: String = modifier.arena_id if modifier else "jungle"
-	var lines: Array[Dictionary] = NarrativeData.get_briefing(arena_id)
-	if lines.is_empty():
-		wave_manager.start()
-		return
-	_dialog_box = _dialog_box_scene.instantiate()
-	add_child(_dialog_box)
-	_dialog_box.dialog_finished.connect(_on_briefing_done)
-	_dialog_box.show_dialog(lines)
-
-
-func _on_briefing_done() -> void:
-	if _dialog_box:
-		_dialog_box.queue_free()
-		_dialog_box = null
-	wave_manager.start()
-
+# --- End-game flows ---
 
 func _on_all_waves_cleared() -> void:
-	show_boss_dialog()
+	_narrative.boss_dialog_done.connect(func(): _narrative.show_results(true), CONNECT_ONE_SHOT)
+	_narrative.show_boss_dialog()
 
 
-func show_boss_dialog() -> void:
-	var arena_id: String = modifier.arena_id if modifier else "jungle"
-	var lines: Array[Dictionary] = NarrativeData.get_boss_dialog(arena_id)
-	if lines.is_empty():
-		return
-	_dialog_box = _dialog_box_scene.instantiate()
-	add_child(_dialog_box)
-	_dialog_box.show_dialog(lines)
+func _on_squad_wiped() -> void:
+	# Dramatic hit stop then show results
+	Engine.time_scale = 0.05
+	await get_tree().create_timer(0.12, true, false, true).timeout
+	Engine.time_scale = 1.0
+	get_tree().create_timer(0.9).timeout.connect(func(): _narrative.show_results(false))
+
+
+func _restore_run() -> void:
+	var data: Dictionary = GameManager.run_data
+	GameManager.restoring_run = false
+	GameManager.run_data = {}
+	GameManager.gold = int(data.get("gold", 0))
+	GameManager.xp = int(data.get("xp", 0))
+	GameManager.level = int(data.get("level", 1))
+	GameManager.enemies_killed = int(data.get("enemies_killed", 0))
+	GameManager.gold_earned = int(data.get("gold_earned", 0))
+	GameManager.max_streak = int(data.get("max_streak", 0))
+	for pid in data.get("passive_ids", []):
+		var item := PassiveItem.get_by_id(str(pid))
+		if item:
+			GameManager.add_passive(item)
+	wave_manager.start_from_wave(int(data.get("current_wave", 1)))

@@ -1,4 +1,5 @@
 ## EventBus — centralny system sygnałów globalnych
+## Sygnały są deklarowane tutaj ale emitowane/odbierane w innych skryptach.
 extends Node
 
 # --- Wave signals ---
@@ -28,7 +29,19 @@ signal squad_wiped
 signal xp_gained(amount: int)
 signal level_up(new_level: int)
 
+# --- Game feel signals ---
+signal enemy_killed_at(position: Vector2)
+signal screen_shake_requested(intensity: float, duration: float)
+
+# --- Crate signals ---
+signal crate_dropped(position: Vector2)
+signal crate_reward(text: String, position: Vector2)
+
 # --- Game state signals ---
 signal mission_started
 signal mission_won
 signal mission_lost
+
+# --- Upgrade Panel (level-up rewards between waves) ---
+signal upgrade_panel_requested
+signal upgrade_panel_completed

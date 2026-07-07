@@ -1,33 +1,62 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://drjoylou34nft"]
 
-[ext_resource type="Script" path="res://src/ui/main_menu.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://38wl3207o06i" path="res://src/ui/main_menu.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dp3x5wm3sor1v" path="res://assets/Przycisk startowy.png" id="2_btn"]
 
-[node name="MainMenu" type="CanvasLayer"]
+[node name="MainMenu" type="CanvasLayer" unique_id=2019316462]
 script = ExtResource("1_script")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=609518201]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1011383138]
 layout_mode = 2
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1072159941]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "🥩 WAR MEAT"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
-layout_mode = 2
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer" unique_id=1764076305]
 custom_minimum_size = Vector2(0, 20)
-
-[node name="StartButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
+
+[node name="StartButton" type="TextureButton" parent="Panel/VBoxContainer" unique_id=1302877673]
 custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
 size_flags_horizontal = 4
+texture_normal = ExtResource("2_btn")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/StartButton" unique_id=2018683555]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -2.0
+offset_right = 5.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.88, 0.88, 0.88, 1)
+theme_override_font_sizes/font_size = 14
 text = "ROZPOCZNIJ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

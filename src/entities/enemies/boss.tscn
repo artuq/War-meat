@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://src/entities/enemies/boss.gd" id="1_boss"]
+[ext_resource type="Script" path="res://src/components/health_component.gd" id="2_hc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_boss"]
 radius = 14.0
@@ -12,3 +13,20 @@ script = ExtResource("1_boss")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_boss")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 8)
+scale = Vector2(1.8, 0.6)
+modulate = Color(0, 0, 0, 0.3)
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+visible = false
+
+[node name="ShieldSprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.3, 0.6, 1.0, 0.6)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_hc")
+max_health = 500

@@ -1,0 +1,416 @@
+{
+  "timestamp": "2026-05-13T12:50:56.077101",
+  "unit_integration": {
+    "error": "Brak pliku raportu",
+    "total": 0,
+    "passed": 0,
+    "failed": 0
+  },
+  "regression": {
+    "status": "OK",
+    "new_failures": [],
+    "fixed_tests": [],
+    "baseline_fail_count": 0,
+    "current_fail_count": 0
+  },
+  "visual": {
+    "screenshots": [
+      {
+        "file": "001_mission_started.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "002_wave_1_start.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "003_heartbeat_005s.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "004_kill_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "005_kill_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "006_kill_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "007_heartbeat_010s.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "008_kill_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "009_kill_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "010_kill_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "011_soldier_hit_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "012_soldier_hit_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "013_soldier_hit_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "014_heartbeat_015s.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "015_kill_t0.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "016_kill_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "017_kill_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "018_kill_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "019_kill_t1.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "020_kill_t2.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "021_heartbeat_020s.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "022_kill_t0.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "023_kill_t1.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "024_kill_t2.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "025_heartbeat_025s.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "026_wave_1_cleared.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "027_upgrade_panel.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "028_shop_opened.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "030_shop_closed.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "030_wave_2_start.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "032_kill_t0.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "032_level_2.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "033_kill_t1.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "034_kill_t2.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "035_heartbeat_030s.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "036_kill_t0.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "037_kill_t1.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "038_kill_t2.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "039_kill_t0.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "040_kill_t1.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "041_kill_t2.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "042_heartbeat_035s.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "043_kill_t0.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "044_kill_t1.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "045_kill_t2.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "046_kill_t0.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "047_kill_t1.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "048_kill_t2.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "049_kill_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "050_kill_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "051_kill_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "052_heartbeat_040s.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "053_kill_t0.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "054_kill_t1.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "055_kill_t2.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "056_heartbeat_045s.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "057_heartbeat_050s.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "058_heartbeat_055s.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "059_wave_2_cleared.png",
+        "status": "NEW_REFERENCE"
+      },
+      {
+        "file": "060_upgrade_panel.png",
+        "status": "NEW_REFERENCE"
+      }
+    ],
+    "failures": [
+      {
+        "file": "001_mission_started.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "002_wave_1_start.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "003_heartbeat_005s.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "004_kill_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "005_kill_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "006_kill_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "007_heartbeat_010s.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "008_kill_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "009_kill_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "010_kill_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "011_soldier_hit_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "012_soldier_hit_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "013_soldier_hit_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "016_kill_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "017_kill_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "018_kill_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "049_kill_t0.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "050_kill_t1.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      },
+      {
+        "file": "051_kill_t2.png",
+        "status": "FAIL",
+        "diff_ratio": 1.0,
+        "threshold": 0.02
+      }
+    ],
+    "passed": 0,
+    "failed": 19
+  }
+}

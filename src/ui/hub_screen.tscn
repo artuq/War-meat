@@ -1,71 +1,64 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://bubuwnu18kchw"]
 
-[ext_resource type="Script" path="res://src/ui/hub_screen.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://c0rmp2ba67ax7" path="res://src/ui/hub_screen.gd" id="1_script"]
 
-[node name="HubScreen" type="CanvasLayer"]
+[node name="HubScreen" type="CanvasLayer" unique_id=1605681451]
 script = ExtResource("1_script")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=20261631]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ResourcesLabel" type="Label" parent="Panel"]
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=582745269]
 layout_mode = 2
-offset_top = 4
-offset_right = -8
-offset_bottom = 20
+clip_contents = true
+
+[node name="ResourcesLabel" type="Label" parent="Panel/VBox" unique_id=145832987]
+layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Surowce: 0"
 horizontal_alignment = 2
 
-[node name="TabContainer" type="TabContainer" parent="Panel"]
+[node name="NavBar" type="PanelContainer" parent="Panel/VBox" unique_id=177591116]
+custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
-offset_top = 22
 
-[node name="Areny" type="MarginContainer" parent="Panel/TabContainer"]
+[node name="TabButtons" type="HBoxContainer" parent="Panel/VBox/NavBar" unique_id=1775832395]
 layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Content" type="MarginContainer" parent="Panel/VBox" unique_id=596600366]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ArenaList" type="VBoxContainer" parent="Panel/TabContainer/Areny"]
+[node name="ArenaContent" type="VBoxContainer" parent="Panel/VBox/Content" unique_id=481558486]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Ulepszenia" type="MarginContainer" parent="Panel/TabContainer"]
+[node name="UpgradeContent" type="ScrollContainer" parent="Panel/VBox/Content" unique_id=948413925]
 visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/Ulepszenia"]
-layout_mode = 2
 size_flags_vertical = 3
 
-[node name="UpgradeList" type="VBoxContainer" parent="Panel/TabContainer/Ulepszenia/ScrollContainer"]
+[node name="UpgradeList" type="VBoxContainer" parent="Panel/VBox/Content/UpgradeContent" unique_id=1833087025]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Klasy" type="MarginContainer" parent="Panel/TabContainer"]
+[node name="ClassContent" type="ScrollContainer" parent="Panel/VBox/Content" unique_id=1836118215]
 visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/Klasy"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ClassList" type="VBoxContainer" parent="Panel/TabContainer/Klasy/ScrollContainer"]
+[node name="ClassList" type="VBoxContainer" parent="Panel/VBox/Content/ClassContent" unique_id=843890431]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
