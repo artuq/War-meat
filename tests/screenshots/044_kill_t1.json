@@ -1,0 +1,103 @@
+{
+  "elapsed": 35.3493163444442,
+  "enemies": [
+    {
+      "hp": 9,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -413.401306152344,
+        602.160339355469
+      ],
+      "type": 1
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -185.404113769531,
+        717.818969726562
+      ],
+      "type": 0
+    },
+    {
+      "hp": 0,
+      "is_dying": true,
+      "knockback_power": 90.0,
+      "pos": [
+        -632.814514160156,
+        587.467163085938
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -600.330017089844,
+        708.651245117188
+      ],
+      "type": 0
+    }
+  ],
+  "frame_index": 44,
+  "game": {
+    "current_wave": 2,
+    "enemies_killed": 10,
+    "gold": 124,
+    "is_mission_active": true,
+    "level": 2,
+    "passives_count": 0,
+    "streak_damage_bonus": 0.0,
+    "streak_speed_bonus": 0.0,
+    "xp": 30
+  },
+  "label": "kill_t1",
+  "metrics": {
+    "avg_enemy_separation": 295.272171020508,
+    "enemies_overlap_soldier": 0,
+    "enemies_with_knockback": 0,
+    "enemies_within_18px": 0,
+    "enemy_count": 3,
+    "min_enemy_separation": 215.134048461914,
+    "projectile_count": 1,
+    "soldier_count": 1
+  },
+  "projectiles": [
+    {
+      "damage": 8,
+      "dir": [
+        0.592786371707916,
+        -0.805359721183777
+      ],
+      "is_crit": false,
+      "pos": [
+        -555.042907714844,
+        502.513885498047
+      ]
+    }
+  ],
+  "soldiers": [
+    {
+      "class": "?",
+      "hp": 105,
+      "is_invulnerable": false,
+      "max_hp": 110,
+      "pos": [
+        -711.558166503906,
+        611.010070800781
+      ]
+    }
+  ],
+  "timestamp_ms": 59681,
+  "ui": {
+    "hud_visible": true,
+    "paused": false,
+    "preview_card_state": "set",
+    "shop_visible": false,
+    "stats_panel_open": false,
+    "upgrade_panel_visible": false
+  }
+}

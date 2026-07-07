@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://crrmym7pabemg"]
+
+[ext_resource type="PackedScene" uid="uid://yy12u5j1bky6" path="res://src/entities/enemies/enemy.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://dx3ggjo3v1tho" path="res://assets/sprites/enemies/Tank.png" id="2_tex"]
+
+[sub_resource type="CircleShape2D" id="CS_body"]
+radius = 7.0
+
+[node name="EnemyTank" unique_id=345472867 instance=ExtResource("1_base")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=981902465]
+shape = SubResource("CS_body")
+
+[node name="BodySprite" parent="." index="1" unique_id=1545007612]
+texture = ExtResource("2_tex")
+
+[node name="Shadow" parent="BodySprite" index="0" unique_id=979933823]
+position = Vector2(2, -5)

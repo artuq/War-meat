@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://7uufmp2nu0tq"]
+
+[ext_resource type="Script" uid="uid://cdr77xwrnpabh" path="res://src/maps/arena.gd" id="1_arena"]
+[ext_resource type="PackedScene" path="res://src/entities/squad/squad.tscn" id="2_squad"]
+[ext_resource type="Script" uid="uid://clp4sckhodx3o" path="res://src/systems/wave_manager.gd" id="3_wave"]
+[ext_resource type="Script" uid="uid://bcql22sxx8paj" path="res://src/systems/loot_spawner.gd" id="4_loot_spawner"]
+[ext_resource type="PackedScene" path="res://src/ui/hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://src/ui/shop_ui.tscn" id="6_shop"]
+[ext_resource type="PackedScene" path="res://src/ui/game_over_ui.tscn" id="7_gameover"]
+[ext_resource type="PackedScene" path="res://src/ui/stats_panel.tscn" id="8_stats"]
+
+[node name="Arena" type="Node2D" unique_id=1546592757]
+script = ExtResource("1_arena")
+
+[node name="Squad" parent="." unique_id=2032857561 instance=ExtResource("2_squad")]
+
+[node name="Camera2D" type="Camera2D" parent="Squad" unique_id=2028096818]
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+
+[node name="WaveManager" type="Node" parent="." unique_id=146873434]
+script = ExtResource("3_wave")
+
+[node name="SpawnTimer" type="Timer" parent="WaveManager" unique_id=1621756966]
+wait_time = 0.8
+
+[node name="LootSpawner" type="Node" parent="." unique_id=1635726134]
+script = ExtResource("4_loot_spawner")
+
+[node name="HUD" parent="." unique_id=763880583 instance=ExtResource("5_hud")]
+
+[node name="ShopUI" parent="." unique_id=717784691 instance=ExtResource("6_shop")]
+
+[node name="GameOverUI" parent="." unique_id=1899316349 instance=ExtResource("7_gameover")]
+
+[node name="StatsPanel" parent="." unique_id=1780900900 instance=ExtResource("8_stats")]

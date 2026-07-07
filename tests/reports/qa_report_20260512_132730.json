@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-05-12T13:27:30.526440",
+  "unit_integration": {
+    "error": "Brak pliku raportu",
+    "total": 0,
+    "passed": 0,
+    "failed": 0
+  },
+  "regression": {
+    "status": "OK",
+    "new_failures": [],
+    "fixed_tests": [],
+    "baseline_fail_count": 0,
+    "current_fail_count": 0
+  },
+  "visual": {
+    "screenshots": [],
+    "failures": [],
+    "passed": 0,
+    "failed": 0
+  }
+}

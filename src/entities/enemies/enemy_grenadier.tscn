@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://byhi4ksigi3sa"]
+
+[ext_resource type="PackedScene" uid="uid://yy12u5j1bky6" path="res://src/entities/enemies/enemy.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://bjego51egc8j6" path="res://assets/sprites/enemies/Grenadier.png" id="2_tex"]
+[ext_resource type="Script" uid="uid://o435siwxf88e" path="res://src/entities/enemies/behaviors/grenade_behavior.gd" id="3_gb"]
+
+[sub_resource type="CircleShape2D" id="CS_body"]
+radius = 6.0
+
+[node name="EnemyGrenadier" unique_id=1937982516 instance=ExtResource("1_base")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=981902465]
+shape = SubResource("CS_body")
+
+[node name="BodySprite" parent="." index="1" unique_id=1545007612]
+texture = ExtResource("2_tex")
+
+[node name="Shadow" parent="BodySprite" index="0" unique_id=979933823]
+modulate = Color(0, 0, 0, 0.3)
+show_behind_parent = false
+z_index = -1
+position = Vector2(0, -5)
+
+[node name="AttackBehavior" type="Node2D" parent="." index="4" unique_id=1925581965]
+script = ExtResource("3_gb")

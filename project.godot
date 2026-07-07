@@ -1,0 +1,52 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="WAR MEAT"
+config/description="Roguelite top-down shooter / Auto-battler"
+run/main_scene="res://src/ui/main_menu.tscn"
+config/features=PackedStringArray("4.6", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*res://src/autoloads/event_bus.gd"
+GameManager="*res://src/autoloads/game_manager.gd"
+SoundManager="*res://src/autoloads/sound_manager.gd"
+SettingsManager="*res://src/autoloads/settings_manager.gd"
+SaveManager="*res://src/autoloads/save_manager.gd"
+QAMode="*res://src/autoloads/qa_mode.gd"
+QAScenarios="*res://src/autoloads/qa_scenarios.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/simple_health_bar/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

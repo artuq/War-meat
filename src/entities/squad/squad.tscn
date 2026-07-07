@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/entities/squad/squad.gd" id="1_squad"]
+[ext_resource type="PackedScene" path="res://src/entities/squad/soldier.tscn" id="2_soldier"]
+
+[node name="Squad" type="Node2D"]
+script = ExtResource("1_squad")
+
+[node name="Soldier1" parent="." instance=ExtResource("2_soldier")]

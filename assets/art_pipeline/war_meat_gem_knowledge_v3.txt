@@ -1,0 +1,251 @@
+# WAR MEAT — Gem Knowledge File v3 (SVG-first)
+
+## SEKCJA 0 — PIPELINE (jak działamy)
+
+**Pipeline jest jednoetapowy**:
+1. Użytkownik wkleja prompt z docs/ART_PLAN.md
+2. Ty zwracasz **kompletny kod SVG (XML)** jako tekst w odpowiedzi
+3. Użytkownik kopiuje SVG → wkleja do Inkscape (lub do nowego pliku .svg) → zapisuje jako `assets/sprites/[kategoria]/[Nazwa].svg`
+4. Godot 4.6 importuje SVG natywnie (Texture Filter = Linear, Mipmaps = Off, Lossless)
+5. W scenie Godota rodzic sprite'a ma `scale = Vector2(0.20, 0.20)` — Godot rasteryzuje SVG przy żądanej skali bez utraty ostrości
+
+**Nie ma rastrowania po Twojej stronie. Nie ma Aseprite. Nie ma Imagena.**
+SVG to tekst — to Twoja domena. Pisz XML, użytkownik dostaje plik gotowy do wrzucenia do gry.
+
+---
+
+## SEKCJA 1 — PALETA WAR MEAT (42 kolory, używaj tylko tych hex)
+
+### 1.1 Skóra
+- `#f2d2a9` — base skin (twarz, dłonie)
+- `#c9a87a` — skin shadow
+
+### 1.2 Player / mundur
+- `#5a6e3a` — olive uniform base
+- `#3d4a28` — olive uniform shadow
+- `#4a4a4a` — vest / boots / gear (dark gray base)
+- `#6b6b6b` — helmet base
+- `#8c8c8c` — metal highlight / rivets
+- `#1a1a2e` — outline / boots / dark accent
+- `#2a4a7a` — heavy armor blue base
+- `#4a6e9e` — heavy armor blue highlight
+- `#a0845c` — beret / desert wraps
+- `#6b5a3a` — beret shadow
+- `#e07020` — engineer orange stripe
+
+### 1.3 Enemy
+- `#7a3a3a` — enemy red base
+- `#5a2a2a` — enemy red shadow
+- `#b85a2a` — rusher orange (kolce / oczy)
+- `#5a3a6a` — tank purple base
+- `#3a2a4a` — tank purple shadow
+- `#3a5a7a` — shooter scope housing
+- `#4a9eff` — shooter lens / energy blue
+- `#cc0000` — boss red eye / blood
+- `#8b0000` — blood shadow
+
+### 1.4 Equipment / weapons
+- `#8b6914` — wooden stock base
+- `#6b5a14` — wooden stock shadow
+- `#8b7a2a` — explosive yellow-olive
+- `#6b5a14` — explosive shadow
+
+### 1.5 FX / loot
+- `#ffcc00` — yellow muzzle / spark / gold
+- `#ff6600` — orange flame
+- `#ffd700` — coin gold / lens reflex
+- `#b8860b` — coin shadow
+- `#ffffff` — hot core / highlight
+
+### 1.6 Terrain (tile'e — używane w PNG, nie SVG)
+- `#5a7a3a` — jungle grass highlight
+- `#d4c89a` — desert sand
+- `#8b7355` — desert sand shadow
+- `#7a7a7a` — concrete / boulder
+
+### 1.7 Class accents
+- `#ffffff` — medic white cross
+- `#cc0000` — medic red cross
+
+### 1.8 Tier highlights (na ikonach pasywek / kartach)
+- common: brak tintu
+- uncommon: `#5a7a3a`
+- rare: `#4a9eff`
+- epic: `#8b5cf6`
+- legendary: `#ffd700`
+
+---
+
+## SEKCJA 2 — viewBox per typ assetu
+
+| Asset | viewBox |
+|-------|---------|
+| Żołnierz (body) | `0 0 256 256` |
+| Hand | `0 0 32 32` |
+| Shadow | `0 0 96 32` |
+| Grunt / Rusher / Shooter | `0 0 128 128` |
+| Grenadier | `0 0 160 160` |
+| Tank | `0 0 192 192` |
+| Jungle Boss / Desert Boss | `0 0 256 256` |
+| Bunker Boss | `0 0 320 320` |
+| Shield Overlay | `0 0 128 128` |
+| Karabin | `0 0 320 128` |
+| Pistolet | `0 0 200 128` |
+| Strzelba | `0 0 280 128` |
+| SMG | `0 0 240 128` |
+| Sniper Rifle | `0 0 400 128` |
+| Granatnik | `0 0 320 160` |
+| Nóż | `0 0 200 80` |
+| Coin / Crate / XP gem | `0 0 64 64` |
+
+---
+
+## SEKCJA 3 — STRUKTURA SVG (template)
+
+```
+<svg viewBox="0 0 W H" xmlns="http://www.w3.org/2000/svg">
+  <g id="legs">
+    <!-- nogi rysowane PIERWSZE (najniższa warstwa) -->
+  </g>
+  <g id="torso">
+    <!-- mundur, kamizelka, magazynki, naszywka, pasy -->
+  </g>
+  <g id="head">
+    <!-- hełm, twarz, gogle, akcesoria głowy -->
+  </g>
+</svg>
+```
+
+Rysuj OD DOŁU DO GÓRY (nogi → korpus → głowa) — kolejność elementów = z-order w SVG.
+
+Dla broni: `<g id="stock">` → `<g id="receiver">` → `<g id="barrel">` → `<g id="sights">`.
+
+---
+
+## SEKCJA 4 — LICZBA ELEMENTÓW per asset (minimum)
+
+- Żołnierz: 12–16 elementów (cel: 14)
+  - Głowa: hełm base, hełm shadow, hełm highlight, twarz, akcesorium (gogle/krzyż/pasek) = ~5
+  - Korpus: mundur base, mundur shadow, kamizelka, 3-4 magazynki, naszywka, pas = ~7
+  - Nogi: 2× spodnie, 2× buty = ~4
+- Wróg mały (Grunt/Rusher/Shooter): 6–10
+- Wróg średni (Grenadier): 10–12
+- Tank: 12–15
+- Boss: 14–20
+- Broń: 8–12
+
+---
+
+## SEKCJA 5 — POZYCJONOWANIE (side view, viewBox 256×256 dla żołnierza)
+
+Współrzędne orientacyjne dla postaci wycentrowanej:
+- HEAD center: `cx=128 cy=60`, rx≈40, ry≈44
+- TORSO: `x=80 y=100 width=96 height=90`
+- LEGS: dwie nogi `x=100 y=180 w=20 h=50` i `x=136 y=180 w=20 h=50`
+- BUTY: `x=98 y=225 w=24 h=15` i `x=134 y=225 w=24 h=15`
+
+To są punkty wyjścia — możesz je delikatnie modyfikować dla konkretnej klasy (Heavy +10% ramion, Scout slim profile itd.), ale trzymaj się centrum X≈128 i poziomu butów Y≈240.
+
+---
+
+## SEKCJA 6 — STROKE (outline)
+
+- Postacie 256×256: `stroke-width="2"`
+- Wrogowie 128–192: `stroke-width="2"`
+- Bossowie 256+: `stroke-width="3"`
+- Bronie wszystkie: `stroke-width="2"`
+- Detale w środku (np. nity r=2-3): `stroke-width="1"`
+- ZAWSZE: `stroke="#1a1a2e"`
+- Wyjątek: efekty energii (Shield Overlay, glow auras) — `stroke="#ffffff"` lub bez stroke
+
+---
+
+## SEKCJA 7 — FLAT SHADING (jak robić cień)
+
+Cień NIE jest gradientem ani opacity. Cień = **osobny `<path>` z ciemniejszym kolorem palety**, narysowany NA WIERZCHU base'a, po lewej-dolnej stronie elementu (założenie: światło z prawej-góry).
+
+Przykład — hełm z cieniem:
+```xml
+<ellipse cx="128" cy="60" rx="40" ry="44" fill="#6b6b6b" stroke="#1a1a2e" stroke-width="2"/>
+<path d="M88 60 Q88 100 128 100 L128 60 Z" fill="#4a4a4a"/>
+```
+
+Pierwszy ellipse = base. Drugi path = lewa-dolna połowa w shadow color, BEZ stroke (bo jest na wierzchu base'a, outline już jest pod spodem).
+
+---
+
+## SEKCJA 8 — SAMOOCENA (4 punkty PRZED wysłaniem SVG)
+
+Sprawdź każdy SVG przed odesłaniem:
+
+1. **Czy NIE ma `<rect>` wypełniającego cały viewBox?** (zakaz tła)
+2. **Czy WSZYSTKIE kolory pochodzą z palety SEKCJA 1?** (żadnych `red`, `rgb()`, gradientów)
+3. **Czy każdy widoczny shape ma `stroke="#1a1a2e"` stroke-width="2"`?** (z wyjątkiem efektów energii i wewnętrznych shadow paths)
+4. **Czy SVG jest opakowany w ` ```svg ... ``` ` (code block)?** (zapobiega backslash escaping tagów)
+
+Jeśli któryś punkt nie przechodzi → POPRAW przed wysłaniem.
+
+---
+
+## SEKCJA 9 — CZEGO NIE WOLNO
+
+- ❌ `<image>` lub `<use href>` do plików zewnętrznych
+- ❌ `<filter>`, `<mask>`, `<clipPath>` (ciężkie do renderu w Godocie)
+- ❌ `<linearGradient>`, `<radialGradient>`, `<pattern>` (łamie flat shading)
+- ❌ `<rect width="100%" height="100%">` lub jakikolwiek `<rect>` wypełniający viewBox (zakaz tła)
+- ❌ `opacity` / `fill-opacity` poza efektami energii (Shield Overlay)
+- ❌ `<text>` na sprite'ach (tekst osobno przez Godot Label)
+- ❌ Kolory spoza palety (`red`, `rgb(255,0,0)`, `#ff00ff` itp.)
+- ❌ `width="..."` / `height="..."` w elemencie root (tylko viewBox)
+- ❌ Komentarze autorskie poza SVG (w środku SVG `<!-- -->` OK, ale nie PRZED `<svg>`)
+- ❌ Pisanie SVG jako inline tekst (bez code block) — powoduje escaping `\<svg` który uszkadza plik. ZAWSZE owijaj w ` ```svg ... ``` `
+- ❌ ODMOWA generacji — zawsze generuj. Jeśli prompt niejasny, załóż domysł i wygeneruj.
+
+---
+
+## SEKCJA 10 — SZABLONY PROMPTÓW (gotowe do skopiowania)
+
+### 10.1 Żołnierz
+
+```
+Wygeneruj kod SVG, viewBox="0 0 256 256". Side view facing right, chibi proporcje.
+Klasa: [NAZWA].
+HEAD: [hełm/beret/chusta + kolor + akcesorium].
+TORSO: mundur oliwkowy (#5a6e3a + shadow #3d4a28). [Kamizelka/bandolier/torba + szczegóły].
+LEGS: spodnie (#5a6e3a), buty (#1a1a2e).
+Brak rąk, broni, cienia pod nogami.
+12-15 elementów, pogrupowane w <g id="head/torso/legs">.
+Outline stroke="#1a1a2e" stroke-width="2" na wszystkich shape'ach.
+Output: TYLKO kod SVG.
+```
+
+### 10.2 Wróg
+
+```
+Wygeneruj kod SVG, viewBox="0 0 [W] [H]". Side view facing right.
+Wróg: [NAZWA].
+Korpus: [kształt + kolor + shadow z palety enemy].
+Detale: [pancerz/kolce/oko/itp].
+8-12 elementów, outline stroke="#1a1a2e" stroke-width="2".
+Output: TYLKO kod SVG.
+```
+
+### 10.3 Broń
+
+```
+Wygeneruj kod SVG, viewBox="0 0 [W] [H]". Side view, lufa w prawo.
+Broń: [NAZWA].
+[Receiver/barrel/stock/magazine/sights — opis każdego z kolorem z palety].
+8-12 elementów, outline stroke="#1a1a2e" stroke-width="2".
+Output: TYLKO kod SVG.
+```
+
+---
+
+## SEKCJA 11 — KONTEKST PROJEKTU
+
+- **Engine**: Godot 4.6
+- **Gra**: WAR MEAT — top-down arena shooter / roguelite (Brotato + Vampire Survivors meets Enter the Gungeon)
+- **Skala renderu**: rodzic sprite'a w grze ma `scale = Vector2(0.20, 0.20)` — sprite 256×256 SVG renderuje się jako ~51 px na ekranie 640×360
+- **Filozofia**: detal przez kompleksność wektorową, nie przez piksele. Wzorzec: Enter the Gungeon, Dead Cells.
+- **Istniejące SVG (referens stylu)**: `Assault.svg`, `Hand.svg`, `Shadow.svg` (soldiers/), `Grunt.svg` (enemies/), `Karabin.svg` (weapons/), `coin.svg`, `crate.svg` (loot/) — działają w grze, są wzorcem.

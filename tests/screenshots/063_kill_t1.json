@@ -1,0 +1,217 @@
+{
+  "elapsed": 39.288601038888,
+  "enemies": [
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -160.094589233398,
+        -312.100280761719
+      ],
+      "type": 0
+    },
+    {
+      "hp": 0,
+      "is_dying": true,
+      "knockback_power": 90.0,
+      "pos": [
+        -170.864761352539,
+        -297.926513671875
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -33.953296661377,
+        -246.801177978516
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -153.519668579102,
+        -287.414306640625
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -211.819396972656,
+        -540.063720703125
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -458.495819091797,
+        -258.046173095703
+      ],
+      "type": 0
+    }
+  ],
+  "frame_index": 63,
+  "game": {
+    "current_wave": 2,
+    "enemies_killed": 25,
+    "gold": 115,
+    "is_mission_active": true,
+    "level": 3,
+    "passives_count": 0,
+    "streak_damage_bonus": 0.1,
+    "streak_speed_bonus": 0.15,
+    "xp": 50
+  },
+  "label": "kill_t1",
+  "metrics": {
+    "avg_enemy_separation": 253.890872383118,
+    "enemies_overlap_soldier": 0,
+    "enemies_with_knockback": 0,
+    "enemies_within_18px": 0,
+    "enemy_count": 5,
+    "min_enemy_separation": 25.5465641021729,
+    "projectile_count": 8,
+    "soldier_count": 2
+  },
+  "projectiles": [
+    {
+      "damage": 8,
+      "dir": [
+        0.560770750045776,
+        0.827971160411835
+      ],
+      "is_crit": false,
+      "pos": [
+        57.8859786987305,
+        56.7343826293945
+      ]
+    },
+    {
+      "damage": 6,
+      "dir": [
+        0.289019912481308,
+        -0.957323133945465
+      ],
+      "is_crit": false,
+      "pos": [
+        -77.2521514892578,
+        -753.025146484375
+      ]
+    },
+    {
+      "damage": 8,
+      "dir": [
+        0.654228150844574,
+        -0.756297290325165
+      ],
+      "is_crit": false,
+      "pos": [
+        -0.463798046112061,
+        -661.261840820312
+      ]
+    },
+    {
+      "damage": 6,
+      "dir": [
+        -0.875893294811249,
+        -0.482504963874817
+      ],
+      "is_crit": false,
+      "pos": [
+        -482.484954833984,
+        -485.373565673828
+      ]
+    },
+    {
+      "damage": 8,
+      "dir": [
+        0.55732923746109,
+        -0.830291509628296
+      ],
+      "is_crit": false,
+      "pos": [
+        -62.0585021972656,
+        -579.71337890625
+      ]
+    },
+    {
+      "damage": 6,
+      "dir": [
+        -0.805798470973969,
+        -0.592189788818359
+      ],
+      "is_crit": false,
+      "pos": [
+        -377.515563964844,
+        -430.756103515625
+      ]
+    },
+    {
+      "damage": 8,
+      "dir": [
+        0.690799117088318,
+        -0.723046720027924
+      ],
+      "is_crit": false,
+      "pos": [
+        -101.472160339355,
+        -465.4912109375
+      ]
+    },
+    {
+      "damage": 9,
+      "dir": [
+        0.879465579986572,
+        0.475962549448013
+      ],
+      "is_crit": false,
+      "pos": [
+        -242.510971069336,
+        -359.130645751953
+      ]
+    }
+  ],
+  "soldiers": [
+    {
+      "class": "?",
+      "hp": 100,
+      "is_invulnerable": false,
+      "max_hp": 120,
+      "pos": [
+        -270.250396728516,
+        -385.786315917969
+      ]
+    },
+    {
+      "class": "?",
+      "hp": 90,
+      "is_invulnerable": false,
+      "max_hp": 110,
+      "pos": [
+        -210.905975341797,
+        -362.048583984375
+      ]
+    }
+  ],
+  "timestamp_ms": 67831,
+  "ui": {
+    "hud_visible": true,
+    "paused": false,
+    "preview_card_state": "set",
+    "shop_visible": false,
+    "stats_panel_open": false,
+    "upgrade_panel_visible": false
+  }
+}

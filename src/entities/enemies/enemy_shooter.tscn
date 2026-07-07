@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://yy12u5j1bky6" path="res://src/entities/enemies/enemy.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://ba5vss2chhfue" path="res://assets/sprites/enemies/Shooter.png" id="2_tex"]
+[ext_resource type="Script" uid="uid://c67kuxh67d768" path="res://src/entities/enemies/behaviors/shoot_behavior.gd" id="3_sb"]
+
+[sub_resource type="CircleShape2D" id="CS_body"]
+radius = 5.0
+
+[node name="EnemyShooter" instance=ExtResource("1_base")]
+
+[node name="BodySprite" parent="." index="2"]
+texture = ExtResource("2_tex")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CS_body")
+
+[node name="AttackBehavior" type="Node2D" parent="."]
+script = ExtResource("3_sb")
+shoot_range = 120.0
+cooldown_max = 1.2

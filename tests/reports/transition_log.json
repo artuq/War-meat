@@ -1,0 +1,110 @@
+{
+  "seed": 1778594214,
+  "transitions": [
+    {
+      "event": "mission_started",
+      "payload": {
+
+      },
+      "time": 1.65
+    },
+    {
+      "event": "wave_started",
+      "payload": {
+        "wave": 1
+      },
+      "time": 1.65
+    },
+    {
+      "event": "level_up",
+      "payload": {
+        "level": 2
+      },
+      "time": 14.7735799000003
+    },
+    {
+      "event": "level_up",
+      "payload": {
+        "level": 3
+      },
+      "time": 25.9159265055553
+    },
+    {
+      "event": "wave_cleared",
+      "payload": {
+        "wave": 1
+      },
+      "time": 26.6588338388887
+    },
+    {
+      "event": "upgrade_panel_requested",
+      "payload": {
+
+      },
+      "time": 28.1613334388884
+    },
+    {
+      "event": "upgrade_panel_completed",
+      "payload": {
+
+      },
+      "time": 28.1613334388884
+    },
+    {
+      "event": "shop_opened",
+      "payload": {
+
+      },
+      "time": 28.1613334388884
+    },
+    {
+      "event": "shop_closed",
+      "payload": {
+
+      },
+      "time": 28.1613334388884
+    },
+    {
+      "event": "wave_started",
+      "payload": {
+        "wave": 2
+      },
+      "time": 28.1613334388884
+    },
+    {
+      "event": "level_up",
+      "payload": {
+        "level": 4
+      },
+      "time": 49.2916587555546
+    },
+    {
+      "event": "wave_cleared",
+      "payload": {
+        "wave": 2
+      },
+      "time": 58.1629004666658
+    },
+    {
+      "event": "upgrade_panel_requested",
+      "payload": {
+
+      },
+      "time": 59.6629004666665
+    },
+    {
+      "event": "upgrade_panel_completed",
+      "payload": {
+
+      },
+      "time": 59.6629004666665
+    },
+    {
+      "event": "shop_opened",
+      "payload": {
+
+      },
+      "time": 59.6629004666665
+    }
+  ]
+}

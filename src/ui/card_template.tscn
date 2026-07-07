@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://bbuku57knmsiw"]
+
+[ext_resource type="Script" uid="uid://dypwh5q0foesy" path="res://src/ui/shop_card.gd" id="1_card"]
+[ext_resource type="Texture2D" uid="uid://bu16vhxi8kwvj" path="res://assets/sprites/ui/cards/shop/rifle_common.png" id="2_ppdfs"]
+
+[sub_resource type="StyleBoxFlat" id="SB_btn"]
+bg_color = Color(0.15, 0.15, 0.18, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.35, 0.4, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="SB_btn_pressed"]
+bg_color = Color(0.1, 0.1, 0.13, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5, 0.5, 0.6, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="SB_btn_hover"]
+bg_color = Color(0.22, 0.22, 0.28, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6, 0.6, 0.7, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="CardTemplate" type="PanelContainer" unique_id=1378050131]
+custom_minimum_size = Vector2(130, 175)
+size_flags_horizontal = 0
+script = ExtResource("1_card")
+
+[node name="BgImage" type="TextureRect" parent="." unique_id=336595093]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_ppdfs")
+expand_mode = 1
+
+[node name="Layout" type="Control" parent="." unique_id=1243710732]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Layout" unique_id=2140442935]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 14.0
+offset_right = 121.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 9
+text = "Karabin"
+vertical_alignment = 1
+
+[node name="DescLabel" type="RichTextLabel" parent="Layout" unique_id=1321039132]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 103.0
+offset_right = 123.0
+offset_bottom = 138.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 7
+theme_override_font_sizes/bold_font_size = 8
+bbcode_enabled = true
+text = "[color=green]DMG: 8[/color]
+Ogien: 3.0/s
+Zasieg: 140"
+scroll_active = false
+
+[node name="BuyButton" type="Button" parent="Layout" unique_id=1690275422]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 143.0
+offset_right = 91.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("SB_btn")
+theme_override_styles/pressed = SubResource("SB_btn_pressed")
+theme_override_styles/hover = SubResource("SB_btn_hover")
+text = "$50"
+
+[node name="LockButton" type="Button" parent="Layout" unique_id=1863509156]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 143.0
+offset_right = 118.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("SB_btn")
+theme_override_styles/pressed = SubResource("SB_btn_pressed")
+theme_override_styles/hover = SubResource("SB_btn_hover")
+text = "🔓"

@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://dd5bfg8ksfnuk"]
+
+[ext_resource type="Script" uid="uid://w0gpev71kjpv" path="res://src/ui/hud.gd" id="1_hud"]
+[ext_resource type="PackedScene" path="res://src/ui/virtual_joystick.tscn" id="2_joy"]
+[ext_resource type="PackedScene" uid="uid://drvgkns1v81b2" path="res://addons/simple_health_bar/health_bar.tscn" id="3_hp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xp_bg"]
+bg_color = Color(0.15, 0.15, 0.2, 0.8)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="HUD" type="CanvasLayer" unique_id=1967928894]
+script = ExtResource("1_hud")
+
+[node name="TopLeft" type="VBoxContainer" parent="." unique_id=1820037789]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 180.0
+offset_bottom = 46.0
+
+[node name="HPBar" parent="TopLeft" unique_id=194651191 instance=ExtResource("3_hp")]
+custom_minimum_size = Vector2(160, 20)
+layout_mode = 2
+
+[node name="LVLabel" type="Label" parent="TopLeft" unique_id=221917748]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "LV.1"
+
+[node name="XPBar" type="ProgressBar" parent="TopLeft" unique_id=1328936364]
+custom_minimum_size = Vector2(160, 12)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xp_bg")
+max_value = 50.0
+show_percentage = false
+
+[node name="GoldRow" type="HBoxContainer" parent="." unique_id=484291405]
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 120.0
+offset_bottom = 68.0
+
+[node name="GoldIcon" type="Label" parent="GoldRow" unique_id=1369767106]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "$"
+horizontal_alignment = 1
+
+[node name="GoldLabel" type="Label" parent="GoldRow" unique_id=699784299]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="TopRight" type="VBoxContainer" parent="." unique_id=853813667]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 6.0
+offset_right = -8.0
+offset_bottom = 50.0
+
+[node name="WaveLabel" type="Label" parent="TopRight" unique_id=1714820837]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "WAVE 0"
+horizontal_alignment = 2
+
+[node name="TimerLabel" type="Label" parent="TopRight" unique_id=750738067]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 2
+
+[node name="PauseButton" type="Button" parent="." unique_id=1234567890]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = 52.0
+offset_right = -8.0
+offset_bottom = 96.0
+custom_minimum_size = Vector2(44, 44)
+theme_override_font_sizes/font_size = 18
+text = "⏸"
+
+[node name="VirtualJoystick" parent="." unique_id=906361577 instance=ExtResource("2_joy")]
+layout_mode = 3
+
+

@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://src/ui/upgrade_panel.gd" id="1_up"]
+
+[sub_resource type="StyleBoxFlat" id="SB_panel"]
+bg_color = Color(0.06, 0.06, 0.10, 0.97)
+border_color = Color(0.85, 0.7, 0.2, 1.0)
+border_width_left = 2
+border_width_right = 2
+border_width_top = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="StyleBoxFlat" id="SB_bg"]
+bg_color = Color(0, 0, 0, 0.75)
+
+[node name="UpgradePanel" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_up")
+
+[node name="Background" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_bg")
+
+[node name="PanelRoot" type="PanelContainer" parent="."]
+theme_override_styles/panel = SubResource("SB_panel")
+
+[node name="Margin" type="MarginContainer" parent="PanelRoot"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBox" type="VBoxContainer" parent="PanelRoot/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="PanelRoot/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "WYBIERZ UPGRADE"
+horizontal_alignment = 1
+
+[node name="CardRow" type="HBoxContainer" parent="PanelRoot/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SkipButton" type="Button" parent="PanelRoot/Margin/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(100, 26)
+theme_override_font_sizes/font_size = 11
+text = "Pomiń"

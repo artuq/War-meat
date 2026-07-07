@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="WaveData" format=3 uid="uid://dpsgcrm1fvrwj"]
+
+[ext_resource type="Script" uid="uid://csux2e7bm8687" path="res://src/data/wave_data.gd" id="1_wd"]
+[ext_resource type="Script" uid="uid://b577fp07jnnvw" path="res://src/data/wave_unit_data.gd" id="2_wud"]
+
+[sub_resource type="Resource" id="unit_grunt"]
+script = ExtResource("2_wud")
+weight = 6.0
+
+[sub_resource type="Resource" id="unit_rusher"]
+script = ExtResource("2_wud")
+enemy_type = 1
+weight = 3.0
+min_wave = 2
+
+[sub_resource type="Resource" id="unit_tank"]
+script = ExtResource("2_wud")
+enemy_type = 2
+weight = 1.5
+min_wave = 3
+
+[sub_resource type="Resource" id="unit_shooter"]
+script = ExtResource("2_wud")
+enemy_type = 3
+weight = 2.0
+min_wave = 3
+
+[sub_resource type="Resource" id="unit_grenadier"]
+script = ExtResource("2_wud")
+enemy_type = 4
+min_wave = 4
+
+[resource]
+script = ExtResource("1_wd")
+wave_duration = 25.0
+initial_spawn_interval = 1.2
+min_spawn_interval = 0.5
+spawn_acceleration = 0.008
+units = Array[ExtResource("2_wud")]([SubResource("unit_grunt"), SubResource("unit_rusher"), SubResource("unit_tank"), SubResource("unit_shooter"), SubResource("unit_grenadier")])

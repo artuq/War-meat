@@ -1,0 +1,274 @@
+[gd_scene format=3 uid="uid://bhl0inywu0apo"]
+
+[ext_resource type="Script" uid="uid://wggknudw7pwy" path="res://src/entities/squad/soldier.gd" id="1_soldier"]
+[ext_resource type="Texture2D" uid="uid://ryn6ym68n76o" path="res://assets/sprites/soldiers/Assault.png" id="3_qfan8"]
+[ext_resource type="Script" uid="uid://yg61nec1vnjl" path="res://src/components/health_component.gd" id="4_hc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sycye"]
+radius = 8.0
+height = 65.17
+
+[sub_resource type="Animation" id="Animation_14rou"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.4), Vector2(0.48, 0.4), Vector2(0.4, 0.48), Vector2(0.48, 0.48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodySprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:shape:radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+
+[sub_resource type="Animation" id="Animation_qfan8"]
+resource_name = "Move"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.32, 0.48), Vector2(0.4, 0.4), Vector2(0.32, 0.48), Vector2(0.4, 0.4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.2617993877991494, 0.0, -0.2617993877991494]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodySprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, 0), Vector2(0, 5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.32, 0.48), Vector2(0.4, 0.4), Vector2(0.32, 0.48), Vector2(0.4, 0.4)]
+}
+
+[sub_resource type="Animation" id="Animation_5x4ip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodySprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BodySprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shadow:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5y6jp"]
+_data = {
+&"Idle": SubResource("Animation_14rou"),
+&"Move": SubResource("Animation_qfan8"),
+&"RESET": SubResource("Animation_5x4ip")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detect"]
+radius = 120.0
+
+[node name="Soldier" type="CharacterBody2D" unique_id=1383704179]
+z_index = 2
+collision_mask = 18
+script = ExtResource("1_soldier")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1857788641]
+shape = SubResource("CapsuleShape2D_sycye")
+
+[node name="BodySprite" type="Sprite2D" parent="." unique_id=1055490196]
+texture_filter = 1
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_qfan8")
+
+[node name="Shadow" type="Sprite2D" parent="BodySprite" unique_id=2094446565]
+show_behind_parent = true
+position = Vector2(0, -3.5)
+
+[node name="Dust" type="CPUParticles2D" parent="." unique_id=111222333]
+z_index = 2
+position = Vector2(0, 35)
+emitting = false
+amount = 12
+lifetime = 0.55
+randomness = 0.8
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 6.0
+initial_velocity_max = 11.0
+scale_amount_min = 1.5
+scale_amount_max = 4.0
+color = Color(0.75, 0.68, 0.52, 0.65)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=526538662]
+libraries/ = SubResource("AnimationLibrary_5y6jp")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1914116713]
+collision_layer = 0
+collision_mask = 2
+
+[node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea" unique_id=1090378065]
+shape = SubResource("CircleShape2D_detect")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1453095325]
+wait_time = 0.5
+autostart = true
+
+[node name="WeaponPivot" type="Node2D" parent="." unique_id=1037499565]
+
+[node name="HandBack" type="Sprite2D" parent="WeaponPivot" unique_id=1902496484]
+visible = false
+z_index = -1
+texture_filter = 1
+position = Vector2(3, 0)
+
+[node name="WeaponSprite" type="Sprite2D" parent="WeaponPivot" unique_id=1436478255]
+z_index = 1
+texture_filter = 1
+position = Vector2(14, 6)
+
+[node name="HandFront" type="Sprite2D" parent="WeaponPivot" unique_id=498061211]
+visible = false
+z_index = 2
+texture_filter = 1
+position = Vector2(5, 0)
+
+[node name="Muzzle" type="Marker2D" parent="WeaponPivot" unique_id=576329464]
+position = Vector2(34, 6)
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1453477349]
+script = ExtResource("4_hc")

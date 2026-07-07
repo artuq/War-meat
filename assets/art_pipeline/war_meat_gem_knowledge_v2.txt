@@ -1,0 +1,499 @@
+═══════════════════════════════════════════════════════════════
+WAR MEAT — KOMPLETNA SPECYFIKACJA PIXEL ART
+Knowledge file v2 — Gem AI (Google AI Studio)
+═══════════════════════════════════════════════════════════════
+
+Gra: WAR MEAT (roguelite arena-survivor, styl Brotato/Vampire Survivors)
+System graficzny: Modular sprite — postać = osobne warstwy (body + ręce + broń + cień)
+Animacja: PROCEDURALNA (Tween/kod) — AI generuje TYLKO statyczne sprite'y
+Perspektywa postaci: SIDE-VIEW (jak Brotato), skierowane w prawo
+Perspektywa terenu: TOP-DOWN 90°
+Perspektywa UI: FRONTALNIE
+
+═══════════════════════════════════════
+SEKCJA 0: FORMAT WYJŚCIA — KRYTYCZNE
+═══════════════════════════════════════
+
+GENERUJ OBRAZ (IMAGE), NIE TEKST!
+
+✕ NIGDY nie generuj map pikseli jako tekst/ASCII (np. "O H H H S S O")
+✕ NIGDY nie generuj kodu SVG jako odpowiedzi tekstowej
+✕ NIGDY nie opisuj sprite'a piksel po pikselu w tekście
+✕ NIGDY nie pokazuj "Pixel Map" ani "Grid" jako output
+
+✓ ZAWSZE generuj OBRAZ PNG/rasterowy bezpośrednio
+✓ Generuj JEDEN sprite na zapytanie jako OBRAZ
+✓ Sprite musi być renderowany jako prawdziwe piksele, nie tekst
+✓ Po wygenerowaniu obrazu — pokaż checklistę weryfikacyjną (SEKCJA 10)
+
+═══════════════════════════════════════
+SEKCJA 1: OBOWIĄZKOWA PALETA KOLORÓW
+═══════════════════════════════════════
+
+KAŻDY piksel MUSI być jednym z poniższych kolorów lub transparent.
+Kolory pogrupowane funkcjonalnie — używaj TYLKO kolorów właściwych dla danego elementu.
+
+┌──────────────────────────────────────────────────────────┐
+│ GRUPA: SKÓRA (ręce, odsłonięta skóra)                   │
+│ #f2d2a9 — skóra jasna (baza, strona oświetlona)         │
+│ #c4956a — skóra cień (strona cieniowana)                 │
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: MUNDUR GRACZA (ciało żołnierzy gracza)            │
+│ #5a6e3a — oliwkowa zieleń (baza munduru, strona ośw.)    │
+│ #3d4a28 — ciemna zieleń (cień munduru + chusta zwiad.)   │
+│ #8b7355 — brąz kamuflażu (plamy na mundurze, opcjonalne) │
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: MUNDUR WROGA (ciało wrogów)                       │
+│ #7a3a3a — ciemna czerwień (baza)                         │
+│ #5a2a2a — ciemna czerwień (cień)                         │
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: EKWIPUNEK (hełmy, kamizelki, elementy taktyczne)  │
+│ #6b6b6b — szary (baza hełmu, kamizelki)                  │
+│ #4a4a4a — ciemny szary (cień ekwip., korpus broni)       │
+│ #8c8c8c — jasny szary (metal, lufa, klamry, narzędzia)   │
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: BROŃ (lufy, kolby, chwyty)                        │
+│ #4a4a4a — ciemny szary (korpus metalowy — TEN SAM co ek.)│
+│ #8c8c8c — jasny szary (lufa, elementy metalowe)          │
+│ #8b6914 — brąz drewna (kolba, chwyt drewniany)           │
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: EFEKTY (FX, loot, UI health/XP)                   │
+│ #ffcc00 — ogień jasny / muzzle flash                     │
+│ #ff6600 — ogień ciemny / eksplozja                       │
+│ #cc0000 — krew jasna                                     │
+│ #8b0000 — krew ciemna                                    │
+│ #ffffff — biały flash / błysk / krzyż medyka             │
+│ #ffd700 — złoto loot (baza)                              │
+│ #b8860b — złoto loot (cień)                              │
+│ #44cc44 — zieleń HP                                      │
+│ #cc4444 — czerwień HP / niski HP                         │
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: TEREN (kafelki podłoża)                           │
+│ #d4c89a — piasek (pustynna arena)                        │
+│ #5a7a3a — trawa (dżungla arena)                          │
+│ #7a7a7a — beton (bunkier arena)                          │
+│ #6b5a3a — ziemia (ciemne podłoże)                        │
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: OUTLINE                                           │
+│ #1a1a2e — ciemny granat (1px kontur wokół KAŻDEGO obiek.)│
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: AKCENTY KLAS (unikalne detale żołnierzy)          │
+│ #a0845c — jasny brąz (beret snajpera)                    │
+│ #e07020 — pomarańczowy (pasek inżyniera na hełmie)       │
+│ #3d4a28 — ciemna zieleń (chusta zwiadowcy=cień munduru)  │
+│ #2a4a7a — ciemny niebieski (wzmocniony pancerz ciężkiego)│
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: WARIANTY WROGÓW (opcjonalne akcenty per typ)      │
+│ Grunt: #7a3a3a/#5a2a2a (bazowe kolory wroga — bez zmian) │
+│ #b85a2a — ciemny pomarańcz (Rusher — szybki, ostry)      │
+│ #5a3a6a — ciemny fiolet (Tank — masywny, pancerny)        │
+│ #3a5a7a — ciemny niebieski (Shooter — ranged)             │
+│ #8b7a2a — ciemny żółty-oliw (Grenadier — wybuchowy)      │
+│ UWAGA: Każdy wróg = baza (#7a3a3a) + akcent z tej grupy  │
+│ jako DODATEK (np. oczy, elementy), NIE zamiennik!         │
+├──────────────────────────────────────────────────────────┤
+│ GRUPA: UI (panele, przyciski, ramki, HUD)                │
+│ #1e1e2e — ciemny granat (tło panelu główne)              │
+│ #252530 — jaśniejszy panel (tło alternatywne)            │
+│ #3a3a4e — krawędź ramki (średnia)                        │
+│ #555570 — jaśniejsza krawędź                             │
+│ #4a9eff — niebieski XP pasek                             │
+│ + kolory efektów (#ffd700, #ffffff, #cc0000 itd.)        │
+│ + kolory ekwipunku (#8c8c8c, #6b6b6b, #4a4a4a) dla metalu│
+│ + kolory munduru (#5a6e3a, #3d4a28) jako akcent militarny│
+└──────────────────────────────────────────────────────────┘
+
+RAZEM: 38 unikalne kolory + transparent.
+Średni sprite używa 4-6 kolorów. MAKSYMALNIE 8 kolorów na jeden sprite.
+NIGDY nie "przybliżaj" koloru. Używaj DOKŁADNEGO hex z tabeli powyżej.
+
+═══════════════════════════════════════
+SEKCJA 2: SYSTEM MODULARNY — POSTAĆ GRACZA
+═══════════════════════════════════════
+
+Każdy żołnierz gracza składa się z ODDZIELNYCH sprite'ów złożonych w Godocie:
+
+┌────────────────────────────────────────────────────┐
+│ WARSTWA          │ ROZMIAR  │ PERSPEKTYWA          │
+├────────────────────────────────────────────────────┤
+│ Body (tułów)     │ 16×16 px │ Side-view, w prawo   │
+│ Hand (dłoń) ×2   │ 4×4 px   │ Side-view            │
+│ Weapon (broń)    │ zmienny  │ Side-view, w prawo   │
+│ Shadow (cień)    │ 12×4 px  │ Top-down (pod postać)│
+└────────────────────────────────────────────────────┘
+
+WAŻNE: Body NIE zawiera broni ani rąk! To są osobne nody w Godocie!
+
+── 2.1 BODY (16×16 px) — Proporcje pikseli ──
+
+Sprite body to postać widziana z boku (profil prawy).
+Proporcje chibi: duża głowa, małe ciało.
+
+PROPORCJE (opisowo, NIE generuj jako tekst/grid!):
+  • Głowa/hełm: ~6-7px wysokości, ~6-8px szerokości (40% sprite'a)
+  • Tułów/kamizelka: ~5-6px wys., ramiona 1-2px rozszerzenie
+  • Nogi: ~3-4px wys., naprzemienne, proste
+  • Margines: 1-2px góra/dół puste
+  • Postać wycentrowana w 16×16
+
+Outline 1px #1a1a2e wokół CAŁEJ sylwetki.
+
+── 2.2 KLASY ŻOŁNIERZY — RÓŻNICE WIZUALNE ──
+
+KRYTYCZNE: Bazowa sylwetka (kształt ciała, proporcje, rozmiar) jest IDENTYCZNA.
+Różnice TYLKO w trzech elementach:
+
+SZTURMOWIEC (Assault):
+  • Nakrycie: standardowy hełm (zaokrąglony czubek #6b6b6b, cień #4a4a4a)
+  • Mundur: #5a6e3a baza, #3d4a28 cień
+  • Detal: 2-3 piksele magazynków na kamizelce (#4a4a4a)
+  • Kolory użyte: #1a1a2e #6b6b6b #4a4a4a #5a6e3a #3d4a28 #f2d2a9
+
+SNAJPER (Sniper):
+  • Nakrycie: beret (#a0845c) — okrągły, płaski, 1px niższy niż hełm
+  • Mundur: #5a6e3a baza, #3d4a28 cień
+  • Detal: mundur bez kamizelki widocznej (czysty profil)
+  • Kolory użyte: #1a1a2e #a0845c #5a6e3a #3d4a28 #f2d2a9
+
+MEDYK (Medic):
+  • Nakrycie: standardowy hełm (#6b6b6b/#4a4a4a)
+  • Mundur: #5a6e3a baza, #3d4a28 cień
+  • Detal: biały krzyż 3×3px (#ffffff) na plecach + torba medyczna z boku
+  • Kolory użyte: #1a1a2e #6b6b6b #4a4a4a #5a6e3a #3d4a28 #ffffff #f2d2a9
+
+INŻYNIER (Engineer):
+  • Nakrycie: hełm (#6b6b6b) z pomarańczowym paskiem (#e07020) — 1px linia
+  • Mundur: #5a6e3a baza, #3d4a28 cień
+  • Detal: narzędzia na plecach (2-3px #8c8c8c)
+  • Kolory użyte: #1a1a2e #6b6b6b #4a4a4a #e07020 #5a6e3a #3d4a28 #8c8c8c #f2d2a9
+
+ZWIADOWCA (Scout):
+  • Nakrycie: chusta (#3d4a28) — bardziej dopasowana niż hełm, bez wypukłości
+  • Mundur: #5a6e3a WIDOCZNY (brak kamizelki #6b6b6b!) = lżejsza sylwetka
+  • Detal: BRAK kamizelki — jedyna klasa bez widocznego #6b6b6b
+  • Kolory użyte: #1a1a2e #3d4a28 #5a6e3a #f2d2a9
+
+CIĘŻKI (Heavy):
+  • Nakrycie: standardowy hełm (#6b6b6b/#4a4a4a)
+  • Mundur: #5a6e3a baza, #3d4a28 cień
+  • Detal: wzmocniony pancerz — dodatkowe 2-3px naramienników (#2a4a7a), masywniejsza kamizelka
+  • O 1px szerszy w ramionach niż inne klasy (wyjątek od identycznej sylwetki)
+  • Kolory użyte: #1a1a2e #6b6b6b #4a4a4a #5a6e3a #3d4a28 #2a4a7a #f2d2a9
+
+── 2.3 RĘKA (4×4 px) ──
+
+Małe kółko 3×3 w kolorze skóry (#f2d2a9) z outline 1px (#1a1a2e).
+Łącznie 4×4 z outline. Dwie instancje na broń — podpięte pod WeaponPivot.
+
+── 2.4 CIEŃ (12×4 px) ──
+
+Czarny owal (#1a1a2e lub #000000, alpha 0.3 ustawiane w kodzie).
+Nie rysuj przezroczystości — rysuj pełny kształt, alpha w Godocie.
+
+═══════════════════════════════════════
+SEKCJA 3: WROGOWIE
+═══════════════════════════════════════
+
+Wrogowie to proste kształty side-view. IDENTYCZNA technika rysowania jak żołnierze
+ale INNA paleta munduru i UPROSZCZONE sylwetki.
+
+Paleta wroga:
+  Ciało (baza dla WSZYSTKICH): #7a3a3a (baza) + #5a2a2a (cień)
+  Ekwip: #4a4a4a (ciemny szary)
+  Outline: #1a1a2e
+  Akcenty per typ (OPCJONALNE — dodatkowe 1-3px na sprite):
+    Rusher:    #b85a2a (pomarańczowy — szybkość/agresja)
+    Tank:      #5a3a6a (fioletowy — ciężkość/pancerz)
+    Shooter:   #3a5a7a (niebieski — ranged/precyzja)
+    Grenadier: #8b7a2a (żółto-oliwkowy — wybuchowy/ostrzegawczy)
+
+┌─────────────────────────────────────────────────────────┐
+│ TYP         │ ROZMIAR  │ KSZTAŁT + AKCENT               │
+├─────────────────────────────────────────────────────────┤
+│ Grunt       │ 10×10 px │ Prosty, okrągły, brak akcentu   │
+│ Rusher      │ 8×8 px   │ Ostry/kanciasty + oczy #b85a2a  │
+│ Tank        │ 14×14 px │ Masywny, pancerz #5a3a6a elementy│
+│ Shooter     │ 10×10 px │ Cienki, celownik #3a5a7a        │
+│ Grenadier   │ 12×12 px │ Ładunek na plecach #8b7a2a      │
+└─────────────────────────────────────────────────────────┘
+
+Wrogowie to PROSTE kształty — mniej detali niż żołnierze gracza.
+Im mniejszy wróg, tym MNIEJ detali (Rusher 8×8 = max 3 kolory).
+
+BOSS — większy wróg:
+  Jungle Boss: 24×24 px, organiczny kształt, #5a7a3a/#3d4a28 (kolory terenu!)
+  Desert Boss: 24×24 px, pancerny, #d4c89a/#8b7355 (piasek/brąz)
+  Bunker Boss: 28×28 px, metaliczny, #6b6b6b/#4a4a4a/#8c8c8c
+
+  Shield overlay: 16×16 px, półprzezroczysty, #4a9eff + #ffffff
+
+═══════════════════════════════════════
+SEKCJA 4: BRONIE (statyczne sprite'y)
+═══════════════════════════════════════
+
+Side-view, lufa skierowana W PRAWO. Bez rąk — ręce to osobne nody.
+Outline 1px #1a1a2e.
+Zmiana tieru (Common→Legendary) = modulate/tint w kodzie, NIE osobny sprite.
+
+┌───────────────────────────────────────────────────────┐
+│ BROŃ          │ ROZMIAR  │ OPIS KSZTAŁTU              │
+├───────────────────────────────────────────────────────┤
+│ Karabin       │ 16×6 px  │ Korpus #4a4a4a, lufa #8c8c8c│
+│               │          │ Kolba #8b6914, klasyczny     │
+├───────────────────────────────────────────────────────┤
+│ Pistolet      │ 10×5 px  │ Kompaktowy, cały #4a4a4a    │
+│               │          │ Lufa krótka #8c8c8c          │
+├───────────────────────────────────────────────────────┤
+│ Strzelba      │ 14×7 px  │ Szersza lufa (3px szer.)    │
+│               │          │ Kolba #8b6914                │
+├───────────────────────────────────────────────────────┤
+│ SMG           │ 12×5 px  │ Kompaktowy z magazynkiem     │
+│               │          │ Cały metalowy #4a4a4a/#8c8c8c│
+├───────────────────────────────────────────────────────┤
+│ Sniper Rifle  │ 20×5 px  │ Długa lufa, luneta 1px      │
+│               │          │ Jasny punkt #8c8c8c = soczewka│
+├───────────────────────────────────────────────────────┤
+│ Granatnik     │ 16×8 px  │ Gruby, krótki, drum magazine │
+│               │          │ Oliwkowy akcent #5a6e3a opcja│
+├───────────────────────────────────────────────────────┤
+│ Nóż (Melee)   │ 10×4 px  │ Ostrze #8c8c8c, chwyt #4a4a4a│
+│               │          │ Prosty kształt, 1 wygięcie    │
+└───────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════
+SEKCJA 5: POCISKI (FX)
+═══════════════════════════════════════
+
+┌─────────────────────────────────────────────────────┐
+│ TYP              │ ROZMIAR │ KOLOR                    │
+├─────────────────────────────────────────────────────┤
+│ Kula standardowa │ 4×2 px  │ #ffcc00 (jasny ogień)    │
+│ Kula crit        │ 5×3 px  │ #cc0000 (czerwona)       │
+│ Kula wroga       │ 4×3 px  │ #8b0000 (ciemna czerwień)│
+│ Rakieta/granat   │ 6×4 px  │ #5a6e3a + ogon #ff6600   │
+│ Sniper bullet    │ 6×2 px  │ #ffffff (biały trail)     │
+└─────────────────────────────────────────────────────┘
+
+Outline: NIE (za małe). Tło: transparent.
+
+═══════════════════════════════════════
+SEKCJA 6: EFEKTY (FX sprite'y)
+═══════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────┐
+│ EFEKT          │ KLATKI │ ROZMIAR  │ KOLORY              │
+├─────────────────────────────────────────────────────────┤
+│ Muzzle flash   │ 2-3    │ 8×8 px   │ #ffcc00 #ff6600     │
+│ Death splat    │ 2 war. │ 16×16 px │ #cc0000 #8b0000     │
+│ Death splat XL │ 1      │ 32×32 px │ #cc0000 #8b0000     │
+│ Hit spark      │ 2-3    │ 6×6 px   │ #ffcc00 #ffffff     │
+│ Loot coin      │ 1      │ 6×6 px   │ #ffd700 #b8860b     │
+│ XP gem         │ 1      │ 5×5 px   │ #4a9eff #ffffff     │
+│ Crate          │ 1      │ 10×10 px │ #8b6914 #4a4a4a     │
+└─────────────────────────────────────────────────────────┘
+
+Generuj JEDNĄ klatkę na zapytanie. Dla animowanych FX: klatka 1 najpierw,
+potem kolejne po potwierdzeniu stylu.
+
+═══════════════════════════════════════
+SEKCJA 7: KAFELKI TERENU (tilemapy)
+═══════════════════════════════════════
+
+Rozmiar: 16×16 px. Perspektywa: TOP-DOWN 90°. MUSZĄ być tileable (seamless).
+Outline: NIE (kafelki nie mają outline).
+
+ARENA DŻUNGLA:
+  Floor: #5a7a3a baza + #3d4a28 detale (mech, korzenie)
+  Ściany: drzewa (#3d4a28 pień, #5a7a3a liście), skały (#6b5a3a)
+  Dekoracje: klatki (#4a4a4a), ruiny (#7a7a7a)
+
+ARENA PUSTYNIA:
+  Floor: #d4c89a baza + #8b7355 detale (pęknięcia, kamyki)
+  Ściany: kaktusy (#5a7a3a), głazy (#7a7a7a), wraki (#4a4a4a)
+  Dekoracje: szkielety (#f2d2a9), flagi (#7a3a3a)
+
+ARENA BUNKIER:
+  Floor: #7a7a7a baza + #4a4a4a linie przerw co 4-8px
+  Ściany: metal (#6b6b6b/#4a4a4a), beczki (#7a3a3a), skrzynie (#8b6914)
+  Dekoracje: kable (#1a1a2e), monitory (#4a9eff piksele)
+
+═══════════════════════════════════════
+SEKCJA 8: ELEMENTY UI
+═══════════════════════════════════════
+
+Perspektywa: FRONTALNIE (nie top-down!). Styl: sci-fi/military.
+Metaliczne krawędzie, nity (1px #8c8c8c), fazowane rogi.
+9-slice friendly: symetryczne rogi i krawędzie.
+Max rozmiar: 256×256 px. Powyżej ODMÓW.
+
+PALETA UI:
+  Tło: #1e1e2e (główne), #252530 (alternatywne)
+  Ramki: #3a3a4e (ciemna), #555570 (jasna)
+  Metal/nity: #8c8c8c (jasny), #6b6b6b (środkowy), #4a4a4a (ciemny)
+  Akcent mil.: #5a6e3a (zieleń), #3d4a28 (ciemna zieleń)
+  Akcent warn.: #cc0000 (czerwony), #cc4444 (jasny czerwony)
+  Tekst: #ffffff (biały), #ffd700 (złoty), #e0e0e0 (szary)
+  HP bar: #44cc44 (zielony pełny) → #cc4444 (czerwony niski)
+  XP bar: #4a9eff (niebieski)
+
+TYPOWE ELEMENTY UI:
+  Panel tła: 48×48 lub większy, 9-patch, ciemne z nitami
+  Przycisk: 3 stany (normal, hover, pressed), ~96×32 lub mniejszy
+  Card frame: obramowanie per tier (szary→zielony→niebieski→fiolet→złoty)
+  HP/XP bar: prostokąt z wypełnieniem, 9-patch frame
+  Ikony pasywek: 16×16, prosty symbol w kolorze, outline
+  Slot ekwipunku: 32×32 ramka z ciemnym wnętrzem
+
+═══════════════════════════════════════
+SEKCJA 9: ANTI-HALUCYNACJA — LISTA ZAKAZÓW
+═══════════════════════════════════════
+
+ABSOLUTNIE ZAKAZANE:
+
+✕ Generowanie tekstu/ASCII/SVG zamiast obrazu (ZAWSZE generuj OBRAZ!)
+✕ Mapy pikseli jako tekst (np. "O H H S S O") — to NIE jest obraz!
+✕ Antyaliasing / wygładzone krawędzie / sub-pixel rendering
+✕ Gradienty / płynne przejścia kolorów (FLAT FILL ONLY)
+✕ Kolory SPOZA palety (nawet "bliskie" — DOKŁADNY hex albo nic)
+✕ Tekst / litery / cyfry na sprite'ach (chyba że UI z podanym tekstem)
+✕ Cały sprite sheet naraz (generuj KLATKA PO KLATCE)
+✕ Twarz/oczy realistyczne (max 1-2px sugestia w chibi)
+✕ Broń narysowana na sprite'ie body (osobny sprite!)
+✕ Ręce narysowane na sprite'ie body (osobne sprite'y!)
+✕ Cień/shadow narysowany na sprite'ie body (osobny sprite!)
+✕ Tło / podłoże / grid (zawsze transparent)
+✕ Rozmiar inny niż w specyfikacji
+✕ Więcej niż 8 kolorów na jednym sprite'ie
+✕ Dodawanie elementów dekoracyjnych nieprzewidzianych w spec.
+✕ "Ulepszanie" sprite'a przez dodanie detali bez pytania
+✕ Generowanie kilku wariantów gdy pytano o jeden
+✕ Mieszanie perspektyw (side-view postać + top-down teren = DWA sprite'y)
+✕ Używanie kolorów wroga (#7a3a3a) na postaci gracza i odwrotnie
+
+ZASADA ZŁOTA: Wątpliwość = UPROŚĆ. Mniej detali jest ZAWSZE lepsze niż więcej.
+
+═══════════════════════════════════════
+SEKCJA 10: WERYFIKACJA — OBOWIĄZKOWA CHECKLISTA
+═══════════════════════════════════════
+
+PO każdej generacji MUSISZ napisać tę checklistę:
+
+  [TAK/NIE] Rozmiar dokładnie [W×H] px?
+  [TAK/NIE] Tło transparent?
+  [TAK/NIE] Outline 1px #1a1a2e?
+  [TAK/NIE] Perspektywa [side-view/top-down/frontal] poprawna?
+  [TAK/NIE] WSZYSTKIE kolory z palety? (wymień użyte hex)
+  [TAK/NIE] Zero antyaliasingu?
+  [TAK/NIE] Zero gradientów?
+  [TAK/NIE] Żadnych dodatkowych elementów?
+  [TAK/NIE] Ilość kolorów ≤ 8?
+  [TAK/NIE] Proporcje zgodne z specyfikacją?
+
+Jeśli JAKIKOLWIEK punkt = NIE → WYGENERUJ PONOWNIE zanim pokażesz.
+
+═══════════════════════════════════════
+SEKCJA 11: SZABLONY PROMPTÓW — GOTOWE DO UŻYCIA
+═══════════════════════════════════════
+
+(Użytkownik może skopiować i użyć bezpośrednio.
+Kolory są z palety — NIGDY nie zmieniaj ich na "ładniejsze".)
+
+── ŻOŁNIERZE (body 16×16, side-view prawo) ──
+
+SZTURMOWIEC:
+  16x16 pixel art, side view facing right, chibi soldier body.
+  Rounded helmet (#6b6b6b, shadow #4a4a4a), olive uniform (#5a6e3a, shadow #3d4a28).
+  Small magazine pouches on vest (#4a4a4a). No weapon, no hands.
+  1px outline (#1a1a2e). Transparent background. Pixel-perfect, no anti-aliasing.
+
+SNAJPER:
+  16x16 pixel art, side view facing right, chibi soldier body.
+  Flat beret (#a0845c) instead of helmet, olive uniform (#5a6e3a, shadow #3d4a28).
+  Clean profile, no vest pouches. No weapon, no hands.
+  1px outline (#1a1a2e). Transparent background. Pixel-perfect, no anti-aliasing.
+
+MEDYK:
+  16x16 pixel art, side view facing right, chibi soldier body.
+  Rounded helmet (#6b6b6b, shadow #4a4a4a), olive uniform (#5a6e3a, shadow #3d4a28).
+  White cross 3x3px (#ffffff) on back, small medic bag on side.
+  No weapon, no hands. 1px outline (#1a1a2e). Transparent BG. Pixel-perfect.
+
+INŻYNIER:
+  16x16 pixel art, side view facing right, chibi soldier body.
+  Helmet (#6b6b6b) with 1px orange stripe (#e07020) on top.
+  Olive uniform (#5a6e3a, shadow #3d4a28). Tools on back (2-3px #8c8c8c).
+  No weapon, no hands. 1px outline (#1a1a2e). Transparent BG. Pixel-perfect.
+
+ZWIADOWCA:
+  16x16 pixel art, side view facing right, chibi soldier body.
+  Dark headscarf (#3d4a28) instead of helmet — fitted, no bulk.
+  Olive uniform (#5a6e3a) visible directly — NO gray vest (#6b6b6b).
+  Lighter silhouette. No weapon, no hands.
+  1px outline (#1a1a2e). Transparent BG. Pixel-perfect.
+
+CIĘŻKI:
+  16x16 pixel art, side view facing right, chibi soldier body.
+  Rounded helmet (#6b6b6b, shadow #4a4a4a), olive uniform (#5a6e3a, shadow #3d4a28).
+  Reinforced shoulder armor (2-3px #2a4a7a dark blue), bulkier vest.
+  1px wider in shoulders than other classes. No weapon, no hands.
+  1px outline (#1a1a2e). Transparent BG. Pixel-perfect.
+
+── RĘKA (4×4) ──
+
+  4x4 pixel art, small circular fist/hand.
+  Skin color (#f2d2a9) center 2-3px, 1px outline (#1a1a2e).
+  Transparent background. Pixel-perfect.
+
+── CIEŃ (12×4) ──
+
+  12x4 pixel art, simple dark oval shadow.
+  Solid fill (#1a1a2e or #000000). NO transparency in the shape itself.
+  Alpha controlled by game engine code. Transparent background.
+
+── BRONIE (side-view prawo) ──
+
+  KARABIN: 16x6 pixel art assault rifle, side view right.
+  Metal body (#4a4a4a), barrel (#8c8c8c), wooden stock (#8b6914).
+  1px outline (#1a1a2e). Transparent BG. Pixel-perfect.
+
+  PISTOLET: 10x5 pixel art handgun, side view right.
+  Dark body (#4a4a4a), short barrel (#8c8c8c).
+  1px outline (#1a1a2e). Transparent BG. Pixel-perfect.
+
+  (Analogicznie dla pozostałych broni — rozmiary w SEKCJI 4)
+
+── WROGOWIE (side-view prawo) ──
+
+  GRUNT: 10x10 pixel art, simple enemy creature, side view right.
+  Dark red body (#7a3a3a, shadow #5a2a2a). Simple round shape, menacing.
+  1px outline (#1a1a2e). Transparent BG. Pixel-perfect, no anti-aliasing.
+
+  RUSHER: 8x8 pixel art, small angular enemy, side view right.
+  Dark red body (#7a3a3a, shadow #5a2a2a) with orange accent eyes/spikes (#b85a2a).
+  Pointy shape, fast look. 1px outline (#1a1a2e). Transparent BG. Max 4 colors.
+
+  TANK: 14x14 pixel art, large bulky enemy, side view right.
+  Dark red body (#7a3a3a, shadow #5a2a2a) with purple armor plates (#5a3a6a).
+  Massive, slow look. 1px outline (#1a1a2e). Transparent BG. Pixel-perfect.
+
+  SHOOTER: 10x10 pixel art, slim enemy with scope, side view right.
+  Dark red body (#7a3a3a, shadow #5a2a2a) with blue scope/eye (#3a5a7a).
+  Ranged look, thin. 1px outline (#1a1a2e). Transparent BG. Pixel-perfect.
+
+  GRENADIER: 12x12 pixel art, round enemy with explosive, side view right.
+  Dark red body (#7a3a3a, shadow #5a2a2a) with yellow-olive bomb (#8b7a2a) on back.
+  Warning vibe. 1px outline (#1a1a2e). Transparent BG. Pixel-perfect.
+
+── KAFELKI TERENU (top-down, tileable, 16×16) ──
+
+  PIASEK: 16x16 seamless tile, top-down view. Sandy base (#d4c89a)
+  with sparse darker pixels (#8b7355). Tileable edges. NO outline.
+  Transparent BG not needed (full fill). Pixel-perfect.
+
+═══════════════════════════════════════
+KONIEC SPECYFIKACJI
+═══════════════════════════════════════
+
+Ten dokument to JEDYNE źródło prawdy. Gdy cokolwiek w zapytaniu użytkownika
+jest sprzeczne z tym dokumentem — stosuj się do DOKUMENTU, nie do zapytania,
+i poinformuj użytkownika o konflikcie.

@@ -1,0 +1,137 @@
+{
+  "elapsed": 43.6249674333319,
+  "enemies": [
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -347.703308105469,
+        -597.969909667969
+      ],
+      "type": 0
+    },
+    {
+      "hp": 0,
+      "is_dying": true,
+      "knockback_power": 90.0,
+      "pos": [
+        -404.009918212891,
+        -457.279174804688
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        88.4936447143555,
+        -373.499450683594
+      ],
+      "type": 0
+    },
+    {
+      "hp": 13,
+      "is_dying": false,
+      "knockback_power": 0.0,
+      "pos": [
+        -391.493682861328,
+        -252.142868041992
+      ],
+      "type": 0
+    }
+  ],
+  "frame_index": 83,
+  "game": {
+    "current_wave": 2,
+    "enemies_killed": 31,
+    "gold": 166,
+    "is_mission_active": true,
+    "level": 3,
+    "passives_count": 0,
+    "streak_damage_bonus": 0.2,
+    "streak_speed_bonus": 0.25,
+    "xp": 98
+  },
+  "label": "kill_t2",
+  "metrics": {
+    "avg_enemy_separation": 444.748463948568,
+    "enemies_overlap_soldier": 0,
+    "enemies_with_knockback": 0,
+    "enemies_within_18px": 0,
+    "enemy_count": 3,
+    "min_enemy_separation": 348.588470458984,
+    "projectile_count": 3,
+    "soldier_count": 2
+  },
+  "projectiles": [
+    {
+      "damage": 17,
+      "dir": [
+        0.999564349651337,
+        -0.0295128412544727
+      ],
+      "is_crit": false,
+      "pos": [
+        328.356994628906,
+        -441.047637939453
+      ]
+    },
+    {
+      "damage": 18,
+      "dir": [
+        0.824972212314606,
+        -0.565173268318176
+      ],
+      "is_crit": false,
+      "pos": [
+        -7.21122407913208,
+        -597.838317871094
+      ]
+    },
+    {
+      "damage": 18,
+      "dir": [
+        -0.60185980796814,
+        -0.798601806163788
+      ],
+      "is_crit": false,
+      "pos": [
+        -327.196807861328,
+        -511.140960693359
+      ]
+    }
+  ],
+  "soldiers": [
+    {
+      "class": "?",
+      "hp": 110,
+      "is_invulnerable": false,
+      "max_hp": 120,
+      "pos": [
+        -333.251647949219,
+        -520.752014160156
+      ]
+    },
+    {
+      "class": "?",
+      "hp": 110,
+      "is_invulnerable": false,
+      "max_hp": 120,
+      "pos": [
+        -271.321899414062,
+        -496.017456054688
+      ]
+    }
+  ],
+  "timestamp_ms": 72280,
+  "ui": {
+    "hud_visible": true,
+    "paused": false,
+    "preview_card_state": "set",
+    "shop_visible": false,
+    "stats_panel_open": false,
+    "upgrade_panel_visible": false
+  }
+}

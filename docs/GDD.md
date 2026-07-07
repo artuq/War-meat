@@ -9,12 +9,12 @@
 | Pole | Wartość |
 |------|---------|
 | **Tytuł** | WAR MEAT |
-| **Gatunek** | Roguelite top-down shooter / Auto-battler |
-| **Platforma** | Do ustalenia (Mobile / PC / Web) |
+| **Gatunek** | Roguelite arena-survivor / Auto-battler (inspiracja: Brotato, Vampire Survivors) |
+| **Platforma** | Mobile (Android) — landscape 640×360 |
 | **Widok** | Top-down 2D |
-| **Styl graficzny** | Pixel art / Sprity 2D |
+| **Styl graficzny** | High-res Pixel Art (à la Enter the Gungeon / Dead Cells) — sprite source 128 px, render w grze ~25 px, Linear texture filter |
 | **Tryb gry** | Singleplayer |
-| **Sterowanie** | Tap-to-move (mobile) / Click-to-move (PC) |
+| **Sterowanie** | Wirtualny joystick (mobile) / Klik-to-move (PC) |
 
 ---
 
@@ -106,24 +106,26 @@ Start misji
               └─▶ Powrót do bazy
 ```
 
-### 3.2 Typy misji
+### 3.2 Areny tematyczne
 
-| Typ | Opis | Nagroda |
-|-----|------|---------|
-| **Arena** | Przetrwaj X fal na zamkniętej arenie | Surowce + waluta |
-| **Misja liniowa** | Przejdź z punktu A do B eliminując wrogów | Surowce + waluta + możliwe unikalne przedmioty |
-| **Boss Rush** | Seria walk z bossami | Legendarne przedmioty |
-| **Obrona** | Broń pozycji przed falami wrogów | Duża ilość surowców |
+Rozgrywka opiera się wyłącznie na zamkniętych arenach — brak misji liniowych (A→B).
+Każda arena ma unikalny temat wizualny, pulę wrogów i modyfikatory środowiskowe.
+
+| Arena | Trudność | Modyfikatory | Boss |
+|-------|----------|-------------|------|
+| **Dżungla** | ⭐ Łatwa | +20% spawn rate, dominacja Rusherów, gęste debris | Szybki boss z dash + summon |
+| **Pustynia** | ⭐⭐ Średnia | Wrogowie +15% range, piasek -10% speed, otwarta przestrzeń | Snajperski boss + faza ukrycia |
+| **Bunkier** | ⭐⭐⭐ Trudna | Wybuchające beczki, ciasne korytarze, więcej ciężkich wrogów | Tank boss z tarczą + berserk |
+
+Każda arena: 5 fal + boss na fali 5. Progresja liniowa — odblokuj kolejną po ukończeniu.
 
 ### 3.3 Meta-progresja (między misjami)
 
 ```
-Baza gracza
-  ├── Koszary — rekrutacja i zarządzanie żołnierzami
-  ├── Zbrojownia — ulepszanie broni
-  ├── Laboratorium — badania (odblokowywanie nowych klas, zdolności)
-  ├── Sklep — kupno przedmiotów za surowce
-  └── Mapa misji — wybór kolejnej misji
+Hub Screen (uproszczony)
+  ├── Wybór areny — odblokowane areny z podglądem trudności
+  ├── Ekwipunek — siatka 4 broni + 8 pasywek z synergiami
+  └── Ulepszenia — permanentne bonusy za surowce (+HP, +DMG, nowe klasy)
 ```
 
 ---
@@ -164,10 +166,27 @@ Bossowie pojawiają się na końcu kluczowych misji. Każdy boss ma:
 ### 5.2 Sklep między falami
 
 Sklep jest dostępny między falami w trakcie misji. Oferuje:
-- Losowe bronie (rzadkość zależna od poziomu fali + szczęścia)
+- Bronie (max 4 sloty — wymiana po zapełnieniu)
+- Pasywne przedmioty (max 8 slotów — synergie za 3+ tego samego typu)
 - Apteczki (leczenie oddziału)
-- Granaty i przedmioty jednorazowe
 - Tymczasowe ulepszenia statystyk (na czas misji)
+
+### 5.3 System ekwipunku (sloty)
+
+```
+┌─────────────────────────────────────┐
+│          ⚔️ EKWIPUNEK              │
+│                                     │
+│  BRONIE (4 sloty):                  │
+│  [Karabin] [Strzelba] [  ] [  ]    │
+│                                     │
+│  PASYWKI (8 slotów):                │
+│  [Luck+] [SPD+] [Armor] [  ]       │
+│  [  ]    [  ]   [  ]    [  ]       │
+│                                     │
+│  SYNERGIE: 🔵 Prędkość ×2          │
+└─────────────────────────────────────┘
+```
 
 ---
 
@@ -208,13 +227,45 @@ Sklep jest dostępny między falami w trakcie misji. Oferuje:
 
 | Gra | Co bierzemy |
 |-----|-------------|
-| **Brotato** | Pętla roguelite, auto-strzelanie, zbieranie lootu, sklep między falami |
-| **Cannon Fodder** | Dowodzenie oddziałem, klimat wojskowy, pixel art |
+| **Brotato** | Core loop arena-survivor, auto-strzelanie, sklep między falami, siatka ekwipunku, juicy SFX |
+| **Vampire Survivors** | Czasowe przetrwanie fal, rosnąca potęga, setki wrogów na ekranie |
+| **Cannon Fodder** | Dowodzenie oddziałem, klimat wojskowy, pixel art, krótkie krzyki śmierci |
 | **Battlefield** | System klas, różnorodność broni, klimat wojskowy |
 
 ---
 
-## 8. Zakres MVP (Minimalny Grywalny Produkt)
+## 8. Audio
+
+> Szczegółowy plan: [AUDIO_PLAN.md](AUDIO_PLAN.md)
+
+### 8.1 Filozofia audio
+
+Brotato-style juiciness + Cannon Fodder militarny klimat. Każda akcja gracza musi mieć natychmiastowy, satysfakcjonujący dźwiękowy feedback. Generacja w SUNO AI, obróbka w Audacity/ffmpeg, pitch-randomization w Godocie.
+
+### 8.2 Kluczowe systemy
+
+| System | Opis |
+|--------|------|
+| **Pitch Randomization** | Każdy strzał/trafienie z ±10% pitch shift + losowy wariant (1 z 3). Zapobiega monotonii |
+| **Voice Limiting** | Max 4 strzały + 8 trafień jednocześnie. Priorytetyzacja (UI > Voice > Weapon > Impact) |
+| **Dynamic Music** | 2 warstwy per arena (base + intense). Crossfade na bazie intensity (wrogowie × fala × boss) |
+| **Low HP Effect** | Poniżej 20% HP: low-pass filter, heartbeat loop, music duck -6dB |
+| **Haptic Feedback** | Wibracje Android powiązane z eksplozjami, bossami, level upem |
+| **Loot Pitch Ramp** | Kolejne monety zbierane pod rząd mają rosnący pitch (+0.05 do max 1.5×) |
+
+### 8.3 Podsumowanie assetów audio
+
+| Kategoria | Ilość | Priorytet |
+|-----------|-------|-----------|
+| SFX Walki | ~45 | P0 |
+| SFX UI/Feedback | ~20 | P1 |
+| Muzyka | ~12 tracków | P2 |
+| SFX Polish | ~8 | P3 |
+| **RAZEM** | **~85** | |
+
+---
+
+## 9. Zakres MVP (Minimalny Grywalny Produkt)
 
 Aby zweryfikować koncept gry, MVP powinien zawierać:
 

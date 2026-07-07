@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-05-12" name="report_8" tests="10" failures="2" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="test_upgrade_system" package="tests/unit" timestamp="2026-05-12T11:20:03" hostname="localhost" tests="10" failures="2" errors="0" skipped="0" flaky="0" time="0.098">
+		<testcase name="test_upgrade_pool_not_empty" classname="test_upgrade_system" time="0.010">
+		</testcase>
+		<testcase name="test_all_upgrades_have_nonzero_value" classname="test_upgrade_system" time="0.003">
+		</testcase>
+		<testcase name="test_all_upgrades_have_valid_id" classname="test_upgrade_system" time="0.005">
+		</testcase>
+		<testcase name="test_all_rarities_represented" classname="test_upgrade_system" time="0.016">
+		</testcase>
+		<testcase name="test_add_run_upgrade_stores_bonus" classname="test_upgrade_system" time="0.017">
+		</testcase>
+		<testcase name="test_add_multiple_same_type_accumulates" classname="test_upgrade_system" time="0.015">
+		</testcase>
+		<testcase name="test_different_types_dont_interfere" classname="test_upgrade_system" time="0.016">
+			<failure message="FAILED: res://tests/unit/test_upgrade_system.gd:89" type="FAILURE">
+<![CDATA[
+Expecting:
+ '0.200000'
+ in range between
+ '0.099000' <> '0.101000'
+]]>
+			</failure>
+			<failure message="FAILED: res://tests/unit/test_upgrade_system.gd:91" type="FAILURE">
+<![CDATA[
+Expecting:
+ '0.200000'
+ in range between
+ '0.049000' <> '0.051000'
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>
